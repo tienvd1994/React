@@ -5,8 +5,11 @@ import {
 } from 'react-router-dom';
 
 import Pagination from 'react-js-pagination';
-import SweetAlert from 'sweetalert-react';
 import '../../node_modules/sweetalert/dist/sweetalert.css';
+import '../../node_modules/toastr/build/toastr.css';
+import $ from 'jquery';
+import swal from 'sweetalert';
+import toastr from 'toastr';
 
 class Home extends Component {
     constructor(props) {
@@ -31,30 +34,46 @@ class Home extends Component {
             .catch(function (error) {
                 console.log(error);
             });
+
+        $("button").click(function () {
+            // swal("Oops...", "Something went wrong!", "error");
+            toastr.success('Have fun storming the castle!', 'Miracle Max Says')
+        });
     }
 
     onDelete(item) {
         let self = this;
-        this.setState({ show: true });
 
-        axios.post('http://192.168.100.200:88/api/product/delete/' + item.ProductID)
-            .then(function (response) {
-                if (response.status) {
-                    axios.get('http://192.168.100.200:88/api/Products?keyword=&pageIndex=' + self.state.pageIndex + '&pageSize=' + self.state.pageSize + '')
-                        .then(function (response) {
-                            let data = response.data;
-                            self.setState({ data: data.items, totalItems: data.totalItems });
-                        })
-                        .catch(function (error) {
-                            console.log(error);
-                        });
+        swal({
+            title: "Xác nhận sửa",
+            text: "Bạn có chắc chắn muốn lưu thông tin không?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Đồng ý",
+            cancelButtonText: "Không",
+            closeOnConfirm: true
+        }, function (isConfirm) {
+            if (isConfirm) {
+                axios.post('http://192.168.100.200:88/api/product/delete/' + item.ProductID)
+                    .then(function (response) {
+                        if (response.status) {
+                            axios.get('http://192.168.100.200:88/api/Products?keyword=&pageIndex=' + self.state.pageIndex + '&pageSize=' + self.state.pageSize + '')
+                                .then(function (response) {
+                                    let data = response.data;
+                                    self.setState({ data: data.items, totalItems: data.totalItems });
+                                })
+                                .catch(function (error) {
+                                    console.log(error);
+                                });
 
-                    alert("Deleted sucessfully.");
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+                            toastr.success("Deleted sucessfully.");
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
+        });
     }
 
     handlePageChange(pageNumber) {
@@ -88,6 +107,7 @@ class Home extends Component {
     render() {
         return (
             <div className="container theme-showcase" role="main">
+                {/* <button>Test jquery</button> */}
                 <div className="row">
                     <div className="col-sm-12">
                         <h1>Product list</h1>

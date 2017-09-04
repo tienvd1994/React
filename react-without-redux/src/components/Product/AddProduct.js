@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import '../../../node_modules/toastr/build/toastr.min.css';
+import $ from 'jquery';
+import toastr from 'toastr';
+import 'jquery-validation';
+
 class AddProduct extends Component {
     constructor(props) {
         super(props);
@@ -73,7 +78,7 @@ class AddProduct extends Component {
             })
             .then(function (response) {
                 if (response.status) {
-                    // alert("Add new sucessfully.");
+                    toastr.success("Add new sucessfully.");
                     self.props.history.goBack();
                     return;
                 }

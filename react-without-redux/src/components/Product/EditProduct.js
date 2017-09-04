@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import $ from 'jquery';
+import toastr from 'toastr';
 
 class EditProduct extends Component {
     constructor(props) {
@@ -94,6 +96,7 @@ class EditProduct extends Component {
             })
             .then(function (response) {
                 if (response.status) {
+                    toastr.success("Update record successfully.");
                     self.props.history.goBack();
                     return;
                 }
