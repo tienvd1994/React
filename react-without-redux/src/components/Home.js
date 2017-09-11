@@ -27,18 +27,12 @@ class Home extends Component {
         let self = this;
         axios.get('http://192.168.100.200:88/api/Products?keyword=&pageIndex=' + this.state.pageIndex + '&pageSize=' + this.state.pageSize + '')
             .then(function (response) {
-                console.log(response);
                 let data = response.data;
                 self.setState({ data: data.items, totalItems: data.totalItems });
             })
             .catch(function (error) {
                 console.log(error);
             });
-
-        $("button").click(function () {
-            // swal("Oops...", "Something went wrong!", "error");
-            toastr.success('Have fun storming the castle!', 'Miracle Max Says')
-        });
     }
 
     onDelete(item) {
@@ -107,7 +101,6 @@ class Home extends Component {
     render() {
         return (
             <div className="container theme-showcase" role="main">
-                {/* <button>Test jquery</button> */}
                 <div className="row">
                     <div className="col-sm-12">
                         <h1>Product list</h1>

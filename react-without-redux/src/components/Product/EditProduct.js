@@ -14,7 +14,7 @@ class EditProduct extends Component {
             supplier: '',
             category: '',
             suppliers: [],
-            categorys: []
+            categorys: [],
         }
     }
 

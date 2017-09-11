@@ -23,7 +23,7 @@ class AddProduct extends Component {
 
     componentDidMount() {
         let self = this;
-        axios.get('http://192.168.100.200:88/api/Suppliers')
+        axios.get('http://localhost:49320/api/Suppliers')
             .then(function (response) {
                 let data = response.data;
                 self.setState({ suppliers: data });
@@ -32,7 +32,7 @@ class AddProduct extends Component {
                 console.log(error);
             });
 
-        axios.get('http://192.168.100.200:88/api/Categories')
+        axios.get('http://localhost:49320/api/Categories')
             .then(function (response) {
                 let data = response.data;
                 self.setState({ categorys: data });
@@ -64,7 +64,7 @@ class AddProduct extends Component {
 
     onSave() {
         let self = this;
-        axios.post('http://192.168.100.200:88/api/Products',
+        axios.post('http://localhost:49320/api/Products',
             {
                 ProductName: this.state.productName,
                 SupplierID: this.state.supplier,

@@ -1,0 +1,5 @@
+/.vs
+/SapoCloneApi/bin
+/SapoCloneApi/obj
+/SapoCloneApi/*.user
+/packages
