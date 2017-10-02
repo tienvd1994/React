@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import configureStore from './store/configureStore';
-import App from './components/App';
 import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
 import routes from './routes';
@@ -9,13 +8,14 @@ import routes from './routes';
 
 // css
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import '../node_modules/metismenu/dist/metisMenu.css';
+import '../src/styles/sb-admin-2.css';
+import '../node_modules/morris.js/morris.css'
+import '../src/styles/font-awesome/css/font-awesome.min.css';
 
 // js
-import $ from 'jquery';
 import registerServiceWorker from './registerServiceWorker';
-
 const store = configureStore();
-// store.dispatch(loadProducts("", 1, 20));
 
 ReactDOM.render(
     <Provider store={store}>

@@ -23,6 +23,7 @@ namespace SapoCloneApi.Models
         public virtual DbSet<Region> Regions { get; set; }
         public virtual DbSet<Shipper> Shippers { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Territory> Territories { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -70,6 +71,10 @@ namespace SapoCloneApi.Models
             modelBuilder.Entity<Product>()
                 .Property(e => e.UnitPrice)
                 .HasPrecision(19, 4);
+
+            modelBuilder.Entity<Product>()
+                .Property(e => e.Image)
+                .IsUnicode(false);
 
             modelBuilder.Entity<Product>()
                 .HasMany(e => e.Order_Details)

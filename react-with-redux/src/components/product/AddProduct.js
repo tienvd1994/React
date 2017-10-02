@@ -1,9 +1,9 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import '../../../node_modules/toastr/build/toastr.min.css';
-import $ from 'jquery';
 import toastr from 'toastr';
 import * as productActions from '../../actions/productActions';
 import * as categoryActions from '../../actions/categoryActions';
@@ -18,7 +18,8 @@ class AddProduct extends Component {
             quantityPerUnit: '',
             unitPrice: 0,
             supplier: '',
-            category: ''
+            category: '',
+            image: ''
         }
 
         this.onSave = this.onSave.bind(this);
@@ -27,12 +28,14 @@ class AddProduct extends Component {
     componentDidMount() {
         this.props.supplierActions.loadSupplierAll();
         this.props.categoryActions.loadCategoryAll();
-        this.props.productActions.getByProductId(this.props.productId);
+
+        if (this.props.productId !== undefined) {
+            this.props.productActions.getByProductId(this.props.productId);
+        }
     }
 
     componentWillReceiveProps(nextProps) {
-        debugger;
-        if (this.props.product != undefined) {
+        if (this.props.product !== undefined) {
             let data = this.props.product;
 
             this.setState({
@@ -41,7 +44,8 @@ class AddProduct extends Component {
                 quantityPerUnit: data.QuantityPerUnit,
                 unitPrice: data.UnitPrice,
                 supplier: data.SupplierID,
-                category: data.CategoryID
+                category: data.CategoryID,
+                image: data.Image
             });
         }
     }
@@ -79,7 +83,8 @@ class AddProduct extends Component {
             UnitsInStock: 0,
             UnitsOnOrder: 0,
             ReorderLevel: 0,
-            Type: 0
+            Type: 0,
+            Image: this.state.image
         };
 
         if (product.ProductID !== 0) {
@@ -113,17 +118,32 @@ class AddProduct extends Component {
         this.context.router.push('/products');
     }
 
+    handleUploadFile = (event) => {
+        const data = new FormData();
+        data.append('file', event.target.files[0]);
+        // data.append('name', 'some value user types');
+        // data.append('description', 'some value user types');
+        axios.post('http://localhost:49320/api/upload/image', data).then((response) => {
+            console.log(response);
+            this.setState({ image: response.data });
+        });
+    }
+
     render() {
         const { categories, suppliers } = this.props;
 
         return (
-            <div className="container">
+            <div id="page-wrapper">
                 <div className="row">
-                    <div className="col-sm-12">
-                        <button className="btn btn-primary" onClick={this.goBack.bind(this)}>Back to list</button>
+                    <div className="col-sm-6">
+                        <h1 className="page-header">
+                            Thêm mới sản phẩm
+                            <small><i className="fa fa-arrow-circle-left"></i>
+                                <a href="javascript:void(0)" onClick={this.goBack.bind(this)}>Back to list</a>
+                            </small>
+                        </h1>
                     </div>
                 </div>
-                <h1>Add new product</h1>
                 <form className="form-horizontal" role="form">
                     <div className="form-group">
                         <label className="col-sm-2 col-md-2 control-label">Product name:</label>
@@ -174,6 +194,14 @@ class AddProduct extends Component {
                         </div>
                     </div>
                     <div className="form-group">
+                        <label className="col-sm-2 col-md-2 control-label">Image:</label>
+                        <div className="col-sm-4">
+                            {(this.state.image === '' || this.state.image === null ? '' :
+                                <img src={"http://localhost:49320/" + this.state.image} class="img-circle" width="100" height="100" />)}
+                            <input type="file" onChange={this.handleUploadFile} />
+                        </div>
+                    </div>
+                    <div className="form-group">
                         <div className="col-sm-10 col-sm-offset-2">
                             <button type="button" className="btn btn-primary" onClick={this.onSave}>Save</button>
                         </div>
@@ -188,29 +216,13 @@ AddProduct.contextTypes = {
     router: PropTypes.object
 };
 
-// function getProductById(products, id) {
-//     debugger;
-//     const course = products.filter(product => product.ProductID == id);
-
-//     if (course) {
-//         return course[0];
-//     }
-
-//     return null;
-// }
-
 function mapStateToProp(state, ownProps) {
     const productId = ownProps.params.id;
-    // let product = {};
-
-    // if (productId) {
-    //     product = getProductById((state.products == undefined || state.products.length === 0) ? state.products : state.products.products, productId);
-    // }
 
     return {
         productId: productId,
         product: state.products.product,
-        categories: state.categories,
+        categories: state.categories.length === 0 ? [] : state.categories.categories,
         suppliers: state.suppliers
     };
 }

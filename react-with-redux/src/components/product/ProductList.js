@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ProductListRow from './ProductListRow';
 import { PAGE_INDEX, PAGE_SIZE } from '../../commons/common';
 
@@ -18,7 +19,7 @@ const ProductList = ({ products }) => {
                     </thead>
                     <tbody>
                         {products.map((product, key) =>
-                            {/* <ProductListRow key={product.ProductID} index={key} product={product} /> */}
+                        {/* <ProductListRow key={product.ProductID} index={key} product={product} /> */ }
                         )}
                     </tbody>
                 </table>

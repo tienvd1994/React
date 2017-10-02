@@ -40,6 +40,9 @@ namespace SapoCloneApi.Models
 
         public int Type { get; set; }
 
+        [StringLength(1000)]
+        public string Image { get; set; }
+
         public virtual Category Category { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

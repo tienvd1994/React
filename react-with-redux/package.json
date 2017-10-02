@@ -4,8 +4,13 @@
   "private": true,
   "dependencies": {
     "axios": "^0.16.2",
+    "blueimp-file-upload": "^9.19.1",
     "bootstrap": "^3.3.7",
     "jquery": "^3.2.1",
+    "jquery.ui.widget": "^1.10.3",
+    "metismenu": "^2.7.0",
+    "morris.js": "^0.5.0",
+    "prop-types": "^15.6.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-js-pagination": "^2.2.0",

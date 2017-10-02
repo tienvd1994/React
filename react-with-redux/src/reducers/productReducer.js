@@ -11,6 +11,7 @@ export default function productReducer(state = { products: [], totalItems: 0, pa
             };
 
         case CREATE_PRODUCT_SUCCESS:
+            debugger;
             return action.products;
 
         case UPDATE_PRODUCT_SUCCESS:
