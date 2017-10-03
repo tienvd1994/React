@@ -3,8 +3,17 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+
+// css
 import '../../../node_modules/toastr/build/toastr.min.css';
+
+// js.
+import $ from 'jquery';
 import toastr from 'toastr';
+import 'jquery-validation';
+import './../../../node_modules/jquery-validation/dist/localization/messages_vi';
+
+// actions.
 import * as productActions from '../../actions/productActions';
 import * as categoryActions from '../../actions/categoryActions';
 import * as supplierActions from '../../actions/supplierActions';
@@ -26,6 +35,23 @@ class AddProduct extends Component {
     }
 
     componentDidMount() {
+        $(function () {
+            $("form[name='editProduct']").validate({
+                rules: {
+                    name: "required",
+                    supplierId: "required",
+                    categoryId: "required",
+                    quantity: {
+                        required: true,
+                        min: 1
+                    }
+                },
+                submitHandler: function (form) {
+                    form.submit();
+                }
+            });
+        });
+
         this.props.supplierActions.loadSupplierAll();
         this.props.categoryActions.loadCategoryAll();
 
@@ -72,6 +98,10 @@ class AddProduct extends Component {
 
     onSave(event) {
         event.preventDefault();
+
+        if (!$('#editProduct').valid()) {
+            return;
+        }
 
         const product = {
             ProductID: this.state.productID,
@@ -144,17 +174,17 @@ class AddProduct extends Component {
                         </h1>
                     </div>
                 </div>
-                <form className="form-horizontal" role="form">
+                <form className="form-horizontal" role="form" name="editProduct" id="editProduct">
                     <div className="form-group">
                         <label className="col-sm-2 col-md-2 control-label">Product name:</label>
                         <div className="col-sm-10">
-                            <input className="form-control" type="text" value={this.state.productName} onChange={this.handleChangeProductName.bind(this)} />
+                            <input className="form-control" name="name" id="name" type="text" value={this.state.productName} onChange={this.handleChangeProductName.bind(this)} />
                         </div>
                     </div>
                     <div className="form-group">
                         <label className="col-sm-2 col-md-2 control-label">Supplier:</label>
                         <div className="col-sm-10">
-                            <select className="form-control" value={this.state.supplier} onChange={this.handleChangeSupplier.bind(this)}>
+                            <select className="form-control" name="supplierId" id="supplierId" value={this.state.supplier} onChange={this.handleChangeSupplier.bind(this)}>
                                 <option value="">
                                     Choosen supplier
                                 </option>
@@ -169,7 +199,7 @@ class AddProduct extends Component {
                     <div className="form-group">
                         <label className="col-sm-2 col-md-2 control-label">Category:</label>
                         <div className="col-sm-10">
-                            <select className="form-control" value={this.state.category} onChange={this.handleChangeCategory.bind(this)}>
+                            <select className="form-control" name="categoryId" id="categoryId" value={this.state.category} onChange={this.handleChangeCategory.bind(this)}>
                                 <option value="">
                                     Choosen category
                                 </option>
@@ -184,7 +214,7 @@ class AddProduct extends Component {
                     <div className="form-group">
                         <label className="col-sm-2 col-md-2 control-label">Quantity per unit:</label>
                         <div className="col-sm-10">
-                            <input className="form-control" value={this.state.quantityPerUnit} onChange={this.handleChangeQuantityPerUnit.bind(this)} type="text" />
+                            <input className="form-control" name="quantity" id="quantity" value={this.state.quantityPerUnit} onChange={this.handleChangeQuantityPerUnit.bind(this)} type="text" />
                         </div>
                     </div>
                     <div className="form-group">

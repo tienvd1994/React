@@ -1,5 +1,11 @@
 import initialState from './initialState';
-import { LOAD_PRODUCTS_SUCCESS, CREATE_PRODUCT_SUCCESS, UPDATE_PRODUCT_SUCCESS, DELETE_PRODUCT_SUCCESS, GET_PRODUCT_SUCCESS } from '../actions/actionTypes';
+import {
+    LOAD_PRODUCTS_SUCCESS,
+    CREATE_PRODUCT_SUCCESS,
+    UPDATE_PRODUCT_SUCCESS,
+    DELETE_PRODUCT_SUCCESS,
+    GET_PRODUCT_SUCCESS
+} from '../actions/actionTypes';
 
 export default function productReducer(state = { products: [], totalItems: 0, pageIndex: 1 }, action) {
     switch (action.type) {
@@ -11,7 +17,6 @@ export default function productReducer(state = { products: [], totalItems: 0, pa
             };
 
         case CREATE_PRODUCT_SUCCESS:
-            debugger;
             return action.products;
 
         case UPDATE_PRODUCT_SUCCESS:

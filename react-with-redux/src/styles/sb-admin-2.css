@@ -402,6 +402,11 @@ table.dataTable thead .sorting:after {
 .timeline-body > p + p {
   margin-top: 5px;
 }
+
+.error {
+  color: #ff0000 !important;
+}
+
 @media (max-width: 767px) {
   ul.timeline:before {
     left: 40px;

@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+
+// css.
 import '../../../node_modules/toastr/build/toastr.min.css';
+
+// js.
+import $ from 'jquery';
 import toastr from 'toastr';
+import 'jquery-validation';
 
 import * as categoryActions from './../../actions/categoryActions';
 
@@ -24,6 +29,22 @@ class AddCategory extends Component {
     }
 
     componentDidMount() {
+        $(function () {
+            $("form[name='editCategory']").validate({
+                rules: {
+                    name: "required",
+                    description: "required",
+                },
+                messages: {
+                    name: "Tên nhóm không được để trống",
+                    description: "Mô tả không được để trống",
+                },
+                submitHandler: function (form) {
+                    form.submit();
+                }
+            });
+        });
+
         this.props.categoryActions.loadCategoryAll();
 
         if (this.props.categoryId !== undefined) {
@@ -59,6 +80,10 @@ class AddCategory extends Component {
 
     onSave(event) {
         event.preventDefault();
+
+        if (!$('#editCategory').valid()) {
+            return;
+        }
 
         const category = {
             CategoryID: this.state.CategoryID,
@@ -113,11 +138,11 @@ class AddCategory extends Component {
                         </h1>
                     </div>
                 </div>
-                <form className="form-horizontal" role="form">
+                <form className="form-horizontal" role="form" name="editCategory" id="editCategory">
                     <div className="form-group">
                         <label className="col-sm-2 col-md-2 control-label">Nhóm cha:</label>
                         <div className="col-sm-6">
-                            <select className="form-control" value={this.state.ParentId} onChange={this.handleChangeParentId.bind(this)}>
+                            <select className="form-control" name="parentId" id="parentId" value={this.state.ParentId} onChange={this.handleChangeParentId.bind(this)}>
                                 <option value="">
                                     Choosen category
                                 </option>
@@ -132,13 +157,13 @@ class AddCategory extends Component {
                     <div className="form-group">
                         <label className="col-sm-2 col-md-2 control-label">Tên nhóm:</label>
                         <div className="col-sm-6">
-                            <input className="form-control" value={this.state.CategoryName} type="text" onChange={this.handleChangeCategoryName.bind(this)} />
+                            <input className="form-control" name="name" id="name" value={this.state.CategoryName} type="text" onChange={this.handleChangeCategoryName.bind(this)} />
                         </div>
                     </div>
                     <div className="form-group">
                         <label className="col-sm-2 col-md-2 control-label">Mô tả:</label>
                         <div className="col-sm-6">
-                            <textarea className="form-control" value={this.state.Description} onChange={this.handleChangeDescription.bind(this)}></textarea>
+                            <textarea className="form-control" name="description" id="description" value={this.state.Description} onChange={this.handleChangeDescription.bind(this)}></textarea>
                         </div>
                     </div>
                     <div className="form-group">
@@ -157,7 +182,6 @@ AddCategory.contextTypes = {
 };
 
 function mapStateToProp(state, ownProps) {
-    debugger;
     const categoryId = ownProps.params.id;
     console.log(state);
 

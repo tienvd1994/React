@@ -23,7 +23,7 @@ class HomePage extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <a href="#">
+                            <a href="javascript:void(0)">
                                 <div className="panel-footer">
                                     <span className="pull-left">View Details</span>
                                     <span className="pull-right"><i className="fa fa-arrow-circle-right"></i></span>
@@ -45,7 +45,7 @@ class HomePage extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <a href="#">
+                            <a href="javascript:void(0)">
                                 <div className="panel-footer">
                                     <span className="pull-left">View Details</span>
                                     <span className="pull-right"><i className="fa fa-arrow-circle-right"></i></span>
@@ -67,7 +67,7 @@ class HomePage extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <a href="#">
+                            <a href="javascript:void(0)">
                                 <div className="panel-footer">
                                     <span className="pull-left">View Details</span>
                                     <span className="pull-right"><i className="fa fa-arrow-circle-right"></i></span>
@@ -89,7 +89,7 @@ class HomePage extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <a href="#">
+                            <a href="javascript:void(0)">
                                 <div className="panel-footer">
                                     <span className="pull-left">View Details</span>
                                     <span className="pull-right"><i className="fa fa-arrow-circle-right"></i></span>
@@ -112,14 +112,14 @@ class HomePage extends Component {
                                         <span className="caret"></span>
                                         </button>
                                         <ul className="dropdown-menu pull-right" role="menu">
-                                            <li><a href="#">Action</a>
+                                            <li><a href="javascript:void(0)">Action</a>
                                             </li>
-                                            <li><a href="#">Another action</a>
+                                            <li><a href="javascript:void(0)">Another action</a>
                                             </li>
-                                            <li><a href="#">Something else here</a>
+                                            <li><a href="javascript:void(0)">Something else here</a>
                                             </li>
                                             <li className="divider"></li>
-                                            <li><a href="#">Separated link</a>
+                                            <li><a href="javascript:void(0)">Separated link</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -139,14 +139,14 @@ class HomePage extends Component {
                                         <span className="caret"></span>
                                         </button>
                                         <ul className="dropdown-menu pull-right" role="menu">
-                                            <li><a href="#">Action</a>
+                                            <li><a href="javascript:void(0)">Action</a>
                                             </li>
-                                            <li><a href="#">Another action</a>
+                                            <li><a href="javascript:void(0)">Another action</a>
                                             </li>
-                                            <li><a href="#">Something else here</a>
+                                            <li><a href="javascript:void(0)">Something else here</a>
                                             </li>
                                             <li className="divider"></li>
-                                            <li><a href="#">Separated link</a>
+                                            <li><a href="javascript:void(0)">Separated link</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -295,14 +295,14 @@ class HomePage extends Component {
                                                         <i className="fa fa-gear"></i> <span className="caret"></span>
                                                     </button>
                                                     <ul className="dropdown-menu" role="menu">
-                                                        <li><a href="#">Action</a>
+                                                        <li><a href="javascript:void(0)">Action</a>
                                                         </li>
-                                                        <li><a href="#">Another action</a>
+                                                        <li><a href="javascript:void(0)">Another action</a>
                                                         </li>
-                                                        <li><a href="#">Something else here</a>
+                                                        <li><a href="javascript:void(0)">Something else here</a>
                                                         </li>
                                                         <li className="divider"></li>
-                                                        <li><a href="#">Separated link</a>
+                                                        <li><a href="javascript:void(0)">Separated link</a>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -342,53 +342,53 @@ class HomePage extends Component {
                         </div>
                             <div className="panel-body">
                                 <div className="list-group">
-                                    <a href="#" className="list-group-item">
+                                    <a href="javascript:void(0)" className="list-group-item">
                                         <i className="fa fa-comment fa-fw"></i> New Comment
                                     <span className="pull-right text-muted small"><em>4 minutes ago</em>
                                         </span>
                                     </a>
-                                    <a href="#" className="list-group-item">
+                                    <a href="javascript:void(0)" className="list-group-item">
                                         <i className="fa fa-twitter fa-fw"></i> 3 New Followers
                                     <span className="pull-right text-muted small"><em>12 minutes ago</em>
                                         </span>
                                     </a>
-                                    <a href="#" className="list-group-item">
+                                    <a href="javascript:void(0)" className="list-group-item">
                                         <i className="fa fa-envelope fa-fw"></i> Message Sent
                                     <span className="pull-right text-muted small"><em>27 minutes ago</em>
                                         </span>
                                     </a>
-                                    <a href="#" className="list-group-item">
+                                    <a href="javascript:void(0)" className="list-group-item">
                                         <i className="fa fa-tasks fa-fw"></i> New Task
                                     <span className="pull-right text-muted small"><em>43 minutes ago</em>
                                         </span>
                                     </a>
-                                    <a href="#" className="list-group-item">
+                                    <a href="javascript:void(0)" className="list-group-item">
                                         <i className="fa fa-upload fa-fw"></i> Server Rebooted
                                     <span className="pull-right text-muted small"><em>11:32 AM</em>
                                         </span>
                                     </a>
-                                    <a href="#" className="list-group-item">
+                                    <a href="javascript:void(0)" className="list-group-item">
                                         <i className="fa fa-bolt fa-fw"></i> Server Crashed!
                                     <span className="pull-right text-muted small"><em>11:13 AM</em>
                                         </span>
                                     </a>
-                                    <a href="#" className="list-group-item">
+                                    <a href="javascript:void(0)" className="list-group-item">
                                         <i className="fa fa-warning fa-fw"></i> Server Not Responding
                                     <span className="pull-right text-muted small"><em>10:57 AM</em>
                                         </span>
                                     </a>
-                                    <a href="#" className="list-group-item">
+                                    <a href="javascript:void(0)" className="list-group-item">
                                         <i className="fa fa-shopping-cart fa-fw"></i> New Order Placed
                                     <span className="pull-right text-muted small"><em>9:49 AM</em>
                                         </span>
                                     </a>
-                                    <a href="#" className="list-group-item">
+                                    <a href="javascript:void(0)" className="list-group-item">
                                         <i className="fa fa-money fa-fw"></i> Payment Received
                                     <span className="pull-right text-muted small"><em>Yesterday</em>
                                         </span>
                                     </a>
                                 </div>
-                                <a href="#" className="btn btn-default btn-block">View All Alerts</a>
+                                <a href="javascript:void(0)" className="btn btn-default btn-block">View All Alerts</a>
                             </div>
                         </div>
                         <div className="panel panel-default">
@@ -397,7 +397,7 @@ class HomePage extends Component {
                         </div>
                             <div className="panel-body">
                                 <div id="morris-donut-chart"></div>
-                                <a href="#" className="btn btn-default btn-block">View Details</a>
+                                <a href="javascript:void(0)" className="btn btn-default btn-block">View Details</a>
                             </div>
                         </div>
                         <div className="chat-panel panel panel-default">
@@ -409,28 +409,28 @@ class HomePage extends Component {
                                     </button>
                                     <ul className="dropdown-menu slidedown">
                                         <li>
-                                            <a href="#">
+                                            <a href="javascript:void(0)">
                                                 <i className="fa fa-refresh fa-fw"></i> Refresh
                                         </a>
                                         </li>
                                         <li>
-                                            <a href="#">
+                                            <a href="javascript:void(0)">
                                                 <i className="fa fa-check-circle fa-fw"></i> Available
                                         </a>
                                         </li>
                                         <li>
-                                            <a href="#">
+                                            <a href="javascript:void(0)">
                                                 <i className="fa fa-times fa-fw"></i> Busy
                                         </a>
                                         </li>
                                         <li>
-                                            <a href="#">
+                                            <a href="javascript:void(0)">
                                                 <i className="fa fa-clock-o fa-fw"></i> Away
                                         </a>
                                         </li>
                                         <li className="divider"></li>
                                         <li>
-                                            <a href="#">
+                                            <a href="javascript:void(0)">
                                                 <i className="fa fa-sign-out fa-fw"></i> Sign Out
                                         </a>
                                         </li>

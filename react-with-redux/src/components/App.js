@@ -70,12 +70,12 @@ class App extends Component {
                     </div>
                     <ul className="nav navbar-top-links navbar-right">
                         <li className="dropdown">
-                            <a className="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <a className="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">
                                 <i className="fa fa-envelope fa-fw"></i> <i className="fa fa-caret-down"></i>
                             </a>
                             <ul className="dropdown-menu dropdown-messages">
                                 <li>
-                                    <a href="#">
+                                    <a href="javascript:void(0)">
                                         <div>
                                             <strong>John Smith</strong>
                                             <span className="pull-right text-muted">
@@ -87,7 +87,7 @@ class App extends Component {
                                 </li>
                                 <li className="divider"></li>
                                 <li>
-                                    <a href="#">
+                                    <a href="javascript:void(0)">
                                         <div>
                                             <strong>John Smith</strong>
                                             <span className="pull-right text-muted">
@@ -99,7 +99,7 @@ class App extends Component {
                                 </li>
                                 <li className="divider"></li>
                                 <li>
-                                    <a href="#">
+                                    <a href="javascript:void(0)">
                                         <div>
                                             <strong>John Smith</strong>
                                             <span className="pull-right text-muted">
@@ -111,7 +111,7 @@ class App extends Component {
                                 </li>
                                 <li className="divider"></li>
                                 <li>
-                                    <a className="text-center" href="#">
+                                    <a className="text-center" href="javascript:void(0)">
                                         <strong>Read All Messages</strong>
                                         <i className="fa fa-angle-right"></i>
                                     </a>
@@ -119,12 +119,12 @@ class App extends Component {
                             </ul>
                         </li>
                         <li className="dropdown">
-                            <a className="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <a className="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">
                                 <i className="fa fa-tasks fa-fw"></i> <i className="fa fa-caret-down"></i>
                             </a>
                             <ul className="dropdown-menu dropdown-tasks">
                                 <li>
-                                    <a href="#">
+                                    <a href="javascript:void(0)">
                                         <div>
                                             <p>
                                                 <strong>Task 1</strong>
@@ -140,7 +140,7 @@ class App extends Component {
                                 </li>
                                 <li className="divider"></li>
                                 <li>
-                                    <a href="#">
+                                    <a href="javascript:void(0)">
                                         <div>
                                             <p>
                                                 <strong>Task 2</strong>
@@ -156,7 +156,7 @@ class App extends Component {
                                 </li>
                                 <li className="divider"></li>
                                 <li>
-                                    <a href="#">
+                                    <a href="javascript:void(0)">
                                         <div>
                                             <p>
                                                 <strong>Task 3</strong>
@@ -172,7 +172,7 @@ class App extends Component {
                                 </li>
                                 <li className="divider"></li>
                                 <li>
-                                    <a href="#">
+                                    <a href="javascript:void(0)">
                                         <div>
                                             <p>
                                                 <strong>Task 4</strong>
@@ -188,7 +188,7 @@ class App extends Component {
                                 </li>
                                 <li className="divider"></li>
                                 <li>
-                                    <a className="text-center" href="#">
+                                    <a className="text-center" href="javascript:void(0)">
                                         <strong>See All Tasks</strong>
                                         <i className="fa fa-angle-right"></i>
                                     </a>
@@ -196,12 +196,12 @@ class App extends Component {
                             </ul>
                         </li>
                         <li className="dropdown">
-                            <a className="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <a className="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">
                                 <i className="fa fa-bell fa-fw"></i> <i className="fa fa-caret-down"></i>
                             </a>
                             <ul className="dropdown-menu dropdown-alerts">
                                 <li>
-                                    <a href="#">
+                                    <a href="javascript:void(0)">
                                         <div>
                                             <i className="fa fa-comment fa-fw"></i> New Comment
                                     <span className="pull-right text-muted small">4 minutes ago</span>
@@ -210,7 +210,7 @@ class App extends Component {
                                 </li>
                                 <li className="divider"></li>
                                 <li>
-                                    <a href="#">
+                                    <a href="javascript:void(0)">
                                         <div>
                                             <i className="fa fa-twitter fa-fw"></i> 3 New Followers
                                     <span className="pull-right text-muted small">12 minutes ago</span>
@@ -219,7 +219,7 @@ class App extends Component {
                                 </li>
                                 <li className="divider"></li>
                                 <li>
-                                    <a href="#">
+                                    <a href="javascript:void(0)">
                                         <div>
                                             <i className="fa fa-envelope fa-fw"></i> Message Sent
                                     <span className="pull-right text-muted small">4 minutes ago</span>
@@ -228,7 +228,7 @@ class App extends Component {
                                 </li>
                                 <li className="divider"></li>
                                 <li>
-                                    <a href="#">
+                                    <a href="javascript:void(0)">
                                         <div>
                                             <i className="fa fa-tasks fa-fw"></i> New Task
                                     <span className="pull-right text-muted small">4 minutes ago</span>
@@ -237,7 +237,7 @@ class App extends Component {
                                 </li>
                                 <li className="divider"></li>
                                 <li>
-                                    <a href="#">
+                                    <a href="javascript:void(0)">
                                         <div>
                                             <i className="fa fa-upload fa-fw"></i> Server Rebooted
                                     <span className="pull-right text-muted small">4 minutes ago</span>
@@ -246,7 +246,7 @@ class App extends Component {
                                 </li>
                                 <li className="divider"></li>
                                 <li>
-                                    <a className="text-center" href="#">
+                                    <a className="text-center" href="javascript:void(0)">
                                         <strong>See All Alerts</strong>
                                         <i className="fa fa-angle-right"></i>
                                     </a>
@@ -254,13 +254,13 @@ class App extends Component {
                             </ul>
                         </li>
                         <li className="dropdown">
-                            <a className="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <a className="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">
                                 <i className="fa fa-user fa-fw"></i> <i className="fa fa-caret-down"></i>
                             </a>
                             <ul className="dropdown-menu dropdown-user">
-                                <li><a href="#"><i className="fa fa-user fa-fw"></i> User Profile</a>
+                                <li><a href="javascript:void(0)"><i className="fa fa-user fa-fw"></i> User Profile</a>
                                 </li>
-                                <li><a href="#"><i className="fa fa-gear fa-fw"></i> Settings</a>
+                                <li><a href="javascript:void(0)"><i className="fa fa-gear fa-fw"></i> Settings</a>
                                 </li>
                                 <li className="divider"></li>
                                 <li><a href="login.html"><i className="fa fa-sign-out fa-fw"></i> Logout</a>
@@ -288,7 +288,7 @@ class App extends Component {
                                     </IndexLink>
                                 </li>
                                 <li>
-                                    <a href="#">
+                                    <a href="javascript:void(0)">
                                         <i className="fa fa-bar-chart-o fa-fw"></i> Catalog<span className="fa arrow"></span></a>
                                     <ul className="nav nav-second-level">
                                         <li>
@@ -300,57 +300,36 @@ class App extends Component {
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="tables.html"><i className="fa fa-table fa-fw"></i> Tables</a>
-                                </li>
-                                <li>
-                                    <a href="forms.html"><i className="fa fa-edit fa-fw"></i> Forms</a>
-                                </li>
-                                <li>
-                                    <a href="#"><i className="fa fa-wrench fa-fw"></i> UI Elements<span className="fa arrow"></span></a>
+                                    <a href="javascript:void(0)"><i className="fa fa-wrench fa-fw"></i> Bán hàng<span className="fa arrow"></span></a>
                                     <ul className="nav nav-second-level">
                                         <li>
-                                            <a href="panels-wells.html">Panels and Wells</a>
-                                        </li>
-                                        <li>
-                                            <a href="buttons.html">Buttons</a>
-                                        </li>
-                                        <li>
-                                            <a href="notifications.html">Notifications</a>
-                                        </li>
-                                        <li>
-                                            <a href="typography.html">Typography</a>
-                                        </li>
-                                        <li>
-                                            <a href="icons.html"> Icons</a>
-                                        </li>
-                                        <li>
-                                            <a href="grid.html">Grid</a>
+                                            <a href="panels-wells.html">Đơn hàng</a>
                                         </li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="#"><i className="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span className="fa arrow"></span></a>
+                                    <a href="javascript:void(0)"><i className="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span className="fa arrow"></span></a>
                                     <ul className="nav nav-second-level">
                                         <li>
-                                            <a href="#">Second Level Item</a>
+                                            <a href="javascript:void(0)">Second Level Item</a>
                                         </li>
                                         <li>
-                                            <a href="#">Second Level Item</a>
+                                            <a href="javascript:void(0)">Second Level Item</a>
                                         </li>
                                         <li>
-                                            <a href="#">Third Level <span className="fa arrow"></span></a>
+                                            <a href="javascript:void(0)">Third Level <span className="fa arrow"></span></a>
                                             <ul className="nav nav-third-level">
                                                 <li>
-                                                    <a href="#">Third Level Item</a>
+                                                    <a href="javascript:void(0)">Third Level Item</a>
                                                 </li>
                                                 <li>
-                                                    <a href="#">Third Level Item</a>
+                                                    <a href="javascript:void(0)">Third Level Item</a>
                                                 </li>
                                                 <li>
-                                                    <a href="#">Third Level Item</a>
+                                                    <a href="javascript:void(0)">Third Level Item</a>
                                                 </li>
                                                 <li>
-                                                    <a href="#">Third Level Item</a>
+                                                    <a href="javascript:void(0)">Third Level Item</a>
                                                 </li>
                                             </ul>
                                         </li>

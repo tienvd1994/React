@@ -11,11 +11,9 @@ import initialState from './initialState';
 export default function categoryReducer(state = initialState.categoriesState, action) {
     switch (action.type) {
         case LOAD_CATEGORY_ALL_SUCCESS:
-            debugger;
             return { ...state, categories: action.categories };
 
         case LOAD_CATEGORY_SUCCESS:
-            debugger;
             return {
                 categories: action.categories.data.items,
                 totalItems: action.categories.data.totalItems,

@@ -132,8 +132,6 @@ CategoryPage.propTypes = {
 }
 
 function mapStateToProp(state, ownProps) {
-
-    debugger;
     return {
         categories: state.categories.length === 0 ? [] : state.categories.categories,
         totalItems: state.categories.length === 0 ? 0 : state.categories.totalItems,

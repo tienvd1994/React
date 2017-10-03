@@ -23,7 +23,6 @@ export function loadCategoryAll() {
     return function (dispatch) {
         return axios.get('http://localhost:49320/api/Categories')
             .then(response => {
-                debugger;
                 let data = response.data;
                 dispatch(loadCategoryAllSuccess(data));
             })
@@ -81,7 +80,6 @@ export function deleteCategory(id) {
     return function (dispatch) {
         axios.post('http://localhost:49320/api/category/delete/' + id)
             .then((response) => {
-                debugger;
                 if (response.data.status) {
                     dispatch(loadCategories("", 1, 20));
                 }
