@@ -79,10 +79,10 @@ class CategoryPage extends Component {
                         <table className="table table-striped table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th>#</th>
-                                    <th>Tên nhóm</th>
-                                    <th>Nhóm cha</th>
-                                    <th>Trạng thái</th>
+                                    <th className="text-center">#</th>
+                                    <th className="text-center">Tên nhóm</th>
+                                    <th className="text-center">Nhóm cha</th>
+                                    <th className="text-center">Trạng thái</th>
                                     <th className="text-center">Sửa/Xóa</th>
                                 </tr>
                             </thead>

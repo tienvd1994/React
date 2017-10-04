@@ -87,10 +87,10 @@ class ProductPage extends Component {
                             <thead>
                                 <tr>
                                     <th className="text-center">#</th>
-                                    <th className="text-center">ProductName</th>
-                                    <th className="text-center">QuantityPerUnit</th>
-                                    <th className="text-center">UnitPrice</th>
-                                    <th className="text-center">Edit/Delete</th>
+                                    <th className="text-center">Tên sản phẩm</th>
+                                    <th className="text-center">Số lượng</th>
+                                    <th className="text-center">Giá</th>
+                                    <th className="text-center">Sửa/Xóa</th>
                                 </tr>
                             </thead>
                             <tbody>

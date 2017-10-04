@@ -11,7 +11,6 @@ import '../../../node_modules/toastr/build/toastr.min.css';
 import $ from 'jquery';
 import toastr from 'toastr';
 import 'jquery-validation';
-import './../../../node_modules/jquery-validation/dist/localization/messages_vi';
 
 // actions.
 import * as productActions from '../../actions/productActions';
@@ -43,7 +42,13 @@ class AddProduct extends Component {
                     categoryId: "required",
                     quantity: {
                         required: true,
-                        min: 1
+                        min: 1,
+                        number: true
+                    },
+                    price: {
+                        required: true,
+                        min: 0,
+                        number: true
                     }
                 },
                 submitHandler: function (form) {
@@ -174,7 +179,7 @@ class AddProduct extends Component {
                         </h1>
                     </div>
                 </div>
-                <form className="form-horizontal" role="form" name="editProduct" id="editProduct">
+                <form className="form-horizontal" name="editProduct" id="editProduct">
                     <div className="form-group">
                         <label className="col-sm-2 col-md-2 control-label">Product name:</label>
                         <div className="col-sm-10">
@@ -220,14 +225,14 @@ class AddProduct extends Component {
                     <div className="form-group">
                         <label className="col-sm-2 col-md-2 control-label">Unit price:</label>
                         <div className="col-sm-10">
-                            <input className="form-control" type="text" value={this.state.unitPrice} onChange={this.handleChangeUnitPrice.bind(this)} />
+                            <input className="form-control" name="price" id="price" type="text" value={this.state.unitPrice} onChange={this.handleChangeUnitPrice.bind(this)} />
                         </div>
                     </div>
                     <div className="form-group">
                         <label className="col-sm-2 col-md-2 control-label">Image:</label>
                         <div className="col-sm-4">
                             {(this.state.image === '' || this.state.image === null ? '' :
-                                <img src={"http://localhost:49320/" + this.state.image} class="img-circle" width="100" height="100" />)}
+                                <img src={"http://localhost:49320/" + this.state.image} alt="img-product" class="img-circle" width="100" height="100" />)}
                             <input type="file" onChange={this.handleUploadFile} />
                         </div>
                     </div>

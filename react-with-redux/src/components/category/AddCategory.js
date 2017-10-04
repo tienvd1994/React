@@ -35,10 +35,6 @@ class AddCategory extends Component {
                     name: "required",
                     description: "required",
                 },
-                messages: {
-                    name: "Tên nhóm không được để trống",
-                    description: "Mô tả không được để trống",
-                },
                 submitHandler: function (form) {
                     form.submit();
                 }
@@ -138,7 +134,7 @@ class AddCategory extends Component {
                         </h1>
                     </div>
                 </div>
-                <form className="form-horizontal" role="form" name="editCategory" id="editCategory">
+                <form className="form-horizontal" name="editCategory" id="editCategory">
                     <div className="form-group">
                         <label className="col-sm-2 col-md-2 control-label">Nhóm cha:</label>
                         <div className="col-sm-6">

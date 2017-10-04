@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link, IndexLink } from 'react-router';
 
 import $ from 'jquery';
@@ -11,6 +12,7 @@ require('metismenu');
 class App extends Component {
     constructor(props) {
         super(props);
+        this.onLogout = this.onLogout.bind(this);
     }
 
     componentDidMount() {
@@ -55,10 +57,16 @@ class App extends Component {
         });
     }
 
+    onLogout(event) {
+        event.preventDefault();
+        localStorage.removeItem('access_token');
+        this.context.router.push('/login');
+    }
+
     render() {
         return (
             <div id="wrapper">
-                <nav className="navbar navbar-default navbar-static-top" role="navigation" style={{ 'marginBottom': 0 }}>
+                <nav className="navbar navbar-default navbar-static-top" style={{ 'marginBottom': 0 }}>
                     <div className="navbar-header">
                         <button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                             <span className="sr-only">Toggle navigation</span>
@@ -66,7 +74,7 @@ class App extends Component {
                             <span className="icon-bar"></span>
                             <span className="icon-bar"></span>
                         </button>
-                        <a className="navbar-brand" href="index.html">SB Admin v2.0</a>
+                        <Link className="navbar-brand" to="/">SSB Admin v2.0</Link>
                     </div>
                     <ul className="nav navbar-top-links navbar-right">
                         <li className="dropdown">
@@ -263,8 +271,7 @@ class App extends Component {
                                 <li><a href="javascript:void(0)"><i className="fa fa-gear fa-fw"></i> Settings</a>
                                 </li>
                                 <li className="divider"></li>
-                                <li><a href="login.html"><i className="fa fa-sign-out fa-fw"></i> Logout</a>
-                                </li>
+                                <li><a href="#" onClick={this.onLogout}><i className="fa fa-sign-out fa-fw"></i> Logout</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -344,5 +351,9 @@ class App extends Component {
         );
     }
 }
+
+App.contextTypes = {
+    router: PropTypes.object
+};
 
 export default App;
