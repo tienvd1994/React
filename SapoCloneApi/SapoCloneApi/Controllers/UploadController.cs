@@ -9,6 +9,7 @@ using System.Web.Http;
 
 namespace SapoCloneApi.Controllers
 {
+    [Authorize]
     public class UploadController : ApiController
     {
         [Route("api/upload/image")]

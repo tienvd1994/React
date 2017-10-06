@@ -14,6 +14,7 @@ using SapoCloneApi.ModelMeta;
 
 namespace SapoCloneApi.Controllers
 {
+    [Authorize]
     public class OrdersController : ApiController
     {
         private SapoCloneContext db = new SapoCloneContext();

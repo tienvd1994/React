@@ -13,6 +13,7 @@ using SapoCloneApi.Models;
 
 namespace SapoCloneApi.Controllers
 {
+    [Authorize]
     public class SuppliersController : ApiController
     {
         private SapoCloneContext db = new SapoCloneContext();

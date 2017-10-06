@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using SapoCloneApi.Models;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
-using SapoCloneApi.Models;
 
 namespace SapoCloneApi.Controllers
 {
+    [Authorize]
     public class CategoriesController : ApiController
     {
         private SapoCloneContext db = new SapoCloneContext();
