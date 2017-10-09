@@ -7,10 +7,20 @@ import { Router, browserHistory, IndexRoute, Route } from 'react-router';
 
 import App from './components/App';
 import HomePage from './components/home/HomePage';
+
+// Products.
 import ProductPage from './components/product/ProductPage';
 import AddProduct from './components/product/AddProduct';
 import CategoryPage from './components/category/CategoryPage';
 import AddCategory from './components/category/AddCategory';
+
+// News
+import CategoryNewsPage from './components/categorynews/CategoryNewsPage';
+import AddCategoryNews from './components/categorynews/AddCategoryNews';
+import NewsPage from './components/news/NewsPage';
+import AddNewsPage from './components/news/AddNewsPage';
+
+// Login
 import LoginContainer from './components/LoginContainer';
 import LoginPage from './components/account/LoginPage';
 
@@ -50,6 +60,13 @@ ReactDOM.render(
                 <Route path="categories" component={CategoryPage} onEnter={authenticate} />
                 <Route path="category" component={AddCategory} onEnter={authenticate} />
                 <Route path="category/:id" component={AddCategory} onEnter={authenticate} />
+
+                <Route path="categoriesnews" component={CategoryNewsPage} onEnter={authenticate} />
+                <Route path="categorynews" component={AddCategoryNews} onEnter={authenticate} />
+                <Route path="categorynews/:id" component={AddCategoryNews} onEnter={authenticate} />
+
+                <Route path="news" component={NewsPage} onEnter={authenticate} />
+                <Route path="news-edit" component={AddNewsPage} onEnter={authenticate} />
             </Route>
 
             <Route component={LoginContainer}>

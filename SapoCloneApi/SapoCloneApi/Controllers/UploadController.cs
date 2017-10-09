@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.IO;
 using System.Web;
 using System.Web.Http;
 
@@ -37,7 +32,7 @@ namespace SapoCloneApi.Controllers
                 string fileNameNotExtension = Path.GetFileNameWithoutExtension(fileName);
                 int i = 1;
 
-                while (System.IO.File.Exists(imagePath))
+                while (File.Exists(imagePath))
                 {
                     fileNameChangedNotExtension = string.Format("{0}-{1}", fileNameNotExtension, i);
                     i++;

@@ -22,7 +22,7 @@ namespace SapoCloneApi.Controllers
         // GET: api/Customers
         public async Task<IEnumerable<Customer>> GetCustomers(string keyword, int pageIndex, int pageSize)
         {
-            var items = await db.Customers.Where(m => (string.IsNullOrEmpty(keyword) || m.ContactName.Contains(keyword))).OrderByDescending(m => m.CustomerID).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
+            var items = await db.Customers.Where(m => (string.IsNullOrEmpty(keyword) || m.Username.Contains(keyword))).OrderByDescending(m => m.CustomerID).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
             return items;
         }
 

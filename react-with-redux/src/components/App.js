@@ -315,30 +315,13 @@ class App extends Component {
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="javascript:void(0)"><i className="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span className="fa arrow"></span></a>
+                                    <a href="javascript:void(0)"><i className="fa fa-sitemap fa-fw"></i> Tin tức<span className="fa arrow"></span></a>
                                     <ul className="nav nav-second-level">
                                         <li>
-                                            <a href="javascript:void(0)">Second Level Item</a>
+                                            <Link to="/news">Tin tức</Link>
                                         </li>
                                         <li>
-                                            <a href="javascript:void(0)">Second Level Item</a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0)">Third Level <span className="fa arrow"></span></a>
-                                            <ul className="nav nav-third-level">
-                                                <li>
-                                                    <a href="javascript:void(0)">Third Level Item</a>
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:void(0)">Third Level Item</a>
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:void(0)">Third Level Item</a>
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:void(0)">Third Level Item</a>
-                                                </li>
-                                            </ul>
+                                            <Link to="/categoriesnews">Nhóm tin tức</Link>
                                         </li>
                                     </ul>
                                 </li>

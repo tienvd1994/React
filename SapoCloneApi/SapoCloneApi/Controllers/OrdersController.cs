@@ -126,11 +126,11 @@ namespace SapoCloneApi.Controllers
 
             if (rs > 0)
             {
-                var listOrderDetail = new List<Order_Detail>();
+                var listOrderDetail = new List<OrderDetail>();
 
                 foreach (var item in orderMeta.Products)
                 {
-                    var orderDetail = new Order_Detail()
+                    var orderDetail = new OrderDetail()
                     {
                         OrderID = order.OrderID,
                         ProductID = item.ProductID,
@@ -142,7 +142,7 @@ namespace SapoCloneApi.Controllers
                     listOrderDetail.Add(orderDetail);
                 }
 
-                db.Order_Details.AddRange(listOrderDetail);
+                db.OrderDetails.AddRange(listOrderDetail);
                 await db.SaveChangesAsync();
             }
 

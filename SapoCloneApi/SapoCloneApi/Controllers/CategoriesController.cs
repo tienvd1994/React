@@ -10,7 +10,7 @@ using System.Web.Http.Description;
 
 namespace SapoCloneApi.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class CategoriesController : ApiController
     {
         private SapoCloneContext db = new SapoCloneContext();

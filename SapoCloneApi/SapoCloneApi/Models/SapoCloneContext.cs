@@ -14,28 +14,27 @@ namespace SapoCloneApi.Models
         }
 
         public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<CustomerDemographic> CustomerDemographics { get; set; }
+        public virtual DbSet<CategoriesNew> CategoriesNews { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
-        public virtual DbSet<Order_Detail> Order_Details { get; set; }
+        public virtual DbSet<Language> Languages { get; set; }
+        public virtual DbSet<News> News { get; set; }
+        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<Picture> Pictures { get; set; }
         public virtual DbSet<Product> Products { get; set; }
-        public virtual DbSet<Region> Regions { get; set; }
-        public virtual DbSet<Shipper> Shippers { get; set; }
+        public virtual DbSet<Setting> Settings { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<Territory> Territories { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<CustomerDemographic>()
-                .Property(e => e.CustomerTypeID)
-                .IsFixedLength();
+            modelBuilder.Entity<Category>()
+                .Property(e => e.UnsignName)
+                .IsUnicode(false);
 
-            modelBuilder.Entity<CustomerDemographic>()
-                .HasMany(e => e.Customers)
-                .WithMany(e => e.CustomerDemographics)
-                .Map(m => m.ToTable("CustomerCustomerDemo").MapLeftKey("CustomerTypeID").MapRightKey("CustomerID"));
+            modelBuilder.Entity<CategoriesNew>()
+                .Property(e => e.UnsignName)
+                .IsUnicode(false);
 
             modelBuilder.Entity<Customer>()
                 .Property(e => e.CustomerID)
@@ -46,12 +45,11 @@ namespace SapoCloneApi.Models
                 .WithOptional(e => e.Employee1)
                 .HasForeignKey(e => e.ReportsTo);
 
-            modelBuilder.Entity<Employee>()
-                .HasMany(e => e.Territories)
-                .WithMany(e => e.Employees)
-                .Map(m => m.ToTable("EmployeeTerritories").MapLeftKey("EmployeeID").MapRightKey("TerritoryID"));
+            modelBuilder.Entity<News>()
+                .Property(e => e.UnsignName)
+                .IsUnicode(false);
 
-            modelBuilder.Entity<Order_Detail>()
+            modelBuilder.Entity<OrderDetail>()
                 .Property(e => e.UnitPrice)
                 .HasPrecision(19, 4);
 
@@ -60,13 +58,13 @@ namespace SapoCloneApi.Models
                 .IsFixedLength();
 
             modelBuilder.Entity<Order>()
-                .Property(e => e.Freight)
-                .HasPrecision(19, 4);
-
-            modelBuilder.Entity<Order>()
-                .HasMany(e => e.Order_Details)
+                .HasMany(e => e.OrderDetails)
                 .WithRequired(e => e.Order)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Product>()
+                .Property(e => e.UnsignName)
+                .IsUnicode(false);
 
             modelBuilder.Entity<Product>()
                 .Property(e => e.UnitPrice)
@@ -77,27 +75,37 @@ namespace SapoCloneApi.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<Product>()
-                .HasMany(e => e.Order_Details)
+                .Property(e => e.OldPrice)
+                .HasPrecision(18, 4);
+
+            modelBuilder.Entity<Product>()
+                .Property(e => e.ProductCost)
+                .HasPrecision(18, 4);
+
+            modelBuilder.Entity<Product>()
+                .Property(e => e.SpecialPrice)
+                .HasPrecision(18, 4);
+
+            modelBuilder.Entity<Product>()
+                .Property(e => e.Weight)
+                .HasPrecision(18, 4);
+
+            modelBuilder.Entity<Product>()
+                .Property(e => e.Length)
+                .HasPrecision(18, 4);
+
+            modelBuilder.Entity<Product>()
+                .Property(e => e.Width)
+                .HasPrecision(18, 4);
+
+            modelBuilder.Entity<Product>()
+                .Property(e => e.Height)
+                .HasPrecision(18, 4);
+
+            modelBuilder.Entity<Product>()
+                .HasMany(e => e.OrderDetails)
                 .WithRequired(e => e.Product)
                 .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Region>()
-                .Property(e => e.RegionDescription)
-                .IsFixedLength();
-
-            modelBuilder.Entity<Region>()
-                .HasMany(e => e.Territories)
-                .WithRequired(e => e.Region)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Shipper>()
-                .HasMany(e => e.Orders)
-                .WithOptional(e => e.Shipper)
-                .HasForeignKey(e => e.ShipVia);
-
-            modelBuilder.Entity<Territory>()
-                .Property(e => e.TerritoryDescription)
-                .IsFixedLength();
         }
     }
 }

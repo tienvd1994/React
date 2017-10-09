@@ -11,7 +11,7 @@ using System.Web.Http.Description;
 
 namespace SapoCloneApi.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class ProductsController : ApiController
     {
         private SapoCloneContext db = new SapoCloneContext();
@@ -94,11 +94,11 @@ namespace SapoCloneApi.Controllers
                 return NotFound();
             }
 
-            var orderDetail = db.Order_Details.Where(m => m.ProductID == id);
+            var orderDetail = db.OrderDetails.Where(m => m.ProductID == id);
 
             if (orderDetail != null && orderDetail.Count() > 0)
             {
-                db.Order_Details.RemoveRange(orderDetail);
+                db.OrderDetails.RemoveRange(orderDetail);
             }
 
             db.Products.Remove(product);

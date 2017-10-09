@@ -8,7 +8,7 @@ import {
 } from './../actions/actionTypes';
 import initialState from './initialState';
 
-export default function categoryReducer(state = initialState.categoriesState, action) {
+export default function categoryReducer(state = { categories: [], totalItems: 0, pageIndex: 1 }, action) {
     switch (action.type) {
         case LOAD_CATEGORY_ALL_SUCCESS:
             return { ...state, categories: action.categories };

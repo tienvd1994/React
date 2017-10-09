@@ -12,47 +12,45 @@ namespace SapoCloneApi.Models
         public Customer()
         {
             Orders = new HashSet<Order>();
-            CustomerDemographics = new HashSet<CustomerDemographic>();
         }
 
         [StringLength(5)]
         public string CustomerID { get; set; }
 
-        [Required]
-        [StringLength(40)]
-        public string CompanyName { get; set; }
+        [StringLength(1000)]
+        public string Username { get; set; }
 
-        [StringLength(30)]
-        public string ContactName { get; set; }
+        [StringLength(1000)]
+        public string Email { get; set; }
 
-        [StringLength(30)]
-        public string ContactTitle { get; set; }
+        public string Password { get; set; }
 
-        [StringLength(60)]
-        public string Address { get; set; }
+        public int PasswordFormatId { get; set; }
 
-        [StringLength(15)]
-        public string City { get; set; }
+        public string PasswordSalt { get; set; }
 
-        [StringLength(15)]
-        public string Region { get; set; }
+        public int VendorId { get; set; }
 
-        [StringLength(10)]
-        public string PostalCode { get; set; }
+        public bool HasShoppingCartItems { get; set; }
 
-        [StringLength(15)]
-        public string Country { get; set; }
+        public bool Active { get; set; }
 
-        [StringLength(24)]
-        public string Phone { get; set; }
+        [StringLength(400)]
+        public string SystemName { get; set; }
 
-        [StringLength(24)]
-        public string Fax { get; set; }
+        public string LastIpAddress { get; set; }
+
+        public DateTime CreatedOnUtc { get; set; }
+
+        public DateTime? LastLoginDateUtc { get; set; }
+
+        public DateTime LastActivityDateUtc { get; set; }
+
+        public bool IsSystemAccount { get; set; }
+
+        public int? CreatedUserId { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CustomerDemographic> CustomerDemographics { get; set; }
     }
 }
