@@ -5,6 +5,8 @@ import {
     GET_CATEGORY_SUCCESS
 } from './actionTypes';
 
+axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('access_token');
+
 export function loadCategoryAllSuccess(categories) {
     return { type: LOAD_CATEGORY_ALL_SUCCESS, categories };
 }
@@ -21,7 +23,12 @@ export function getByCategoryIdSuccess(category) {
 
 export function loadCategoryAll() {
     return function (dispatch) {
-        return axios.get('http://localhost:49320/api/Categories')
+        return axios.get('http://localhost:49320/api/Categories',
+            {
+                'headers': {
+                    'Authorization': 'Bearer ' + localStorage.getItem('access_token')
+                }
+            })
             .then(response => {
                 let data = response.data;
                 dispatch(loadCategoryAllSuccess(data));
@@ -34,6 +41,7 @@ export function loadCategoryAll() {
 
 export function loadCategories(keyword, pageIndex, pageSize) {
     return function (dispatch) {
+
         return axios.get('http://localhost:49320/api/Categories?keyword=' + keyword + '&pageIndex=' + pageIndex + '&pageSize=' + pageSize + '')
             .then((response) => {
                 let data = {

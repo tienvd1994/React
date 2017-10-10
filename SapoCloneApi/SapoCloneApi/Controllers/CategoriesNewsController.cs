@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using SapoCloneApi.Models;
+using System;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
-using SapoCloneApi.Models;
 
 namespace SapoCloneApi.Controllers
 {
+    [Authorize]
     public class CategoriesNewsController : ApiController
     {
         private SapoCloneContext db = new SapoCloneContext();
@@ -64,7 +63,7 @@ namespace SapoCloneApi.Controllers
                 return NotFound();
             }
 
-            item.Published = true;
+            item.Published = categoriesNew.Published;
             item.Name = categoriesNew.Name;
             item.Description = categoriesNew.Description;
             item.UnsignName = Common.Utils.Ucs2Convert(categoriesNew.Name);

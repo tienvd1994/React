@@ -21,7 +21,6 @@ class AddNewsPage extends Component {
             Id: 0,
             Name: '',
             Description: '',
-            ParentId: -1,
             Status: 1
         }
 
@@ -41,7 +40,7 @@ class AddNewsPage extends Component {
             });
         });
 
-        // this.props.actions.loadCategoriesNewsAll();
+        this.props.actions.loadCategoriesNewsAll();
 
         if (this.props.categoryNewsId !== undefined) {
             this.props.actions.getById(this.props.categoryNewsId);
@@ -131,7 +130,7 @@ class AddNewsPage extends Component {
                     </div>
                 </div>
                 <form className="form-horizontal" name="editCategory" id="editCategory">
-                    {/* <div className="form-group">
+                    <div className="form-group">
                         <label className="col-sm-2 col-md-2 control-label">Nhóm cha:</label>
                         <div className="col-sm-6">
                             <select className="form-control" name="parentId" id="parentId" value={this.state.ParentId} onChange={this.handleChangeParentId.bind(this)}>
@@ -145,7 +144,7 @@ class AddNewsPage extends Component {
                                 })}
                             </select>
                         </div>
-                    </div> */}
+                    </div>
                     <div className="form-group">
                         <label className="col-sm-2 col-md-2 control-label">Tên nhóm:</label>
                         <div className="col-sm-6">

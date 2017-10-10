@@ -10,7 +10,7 @@ using System.Web.Http.Description;
 
 namespace SapoCloneApi.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class CategoriesController : ApiController
     {
         private SapoCloneContext db = new SapoCloneContext();
@@ -32,7 +32,8 @@ namespace SapoCloneApi.Controllers
                     CategoryName = m.CategoryName,
                     Description = m.Description,
                     ParentId = m.ParentId,
-                    Status = m.Status
+                    Status = m.Status,
+                    Published = m.Published
                 }),
                 totalItems = db.Categories.Count(m => (string.IsNullOrEmpty(keyword) || m.CategoryName.Contains(keyword)))
             });

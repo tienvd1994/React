@@ -93,7 +93,7 @@ class LoginPage extends Component {
                                 </div>
                                 <div className="checkbox">
                                     <label>
-                                        <input name="remember" type="checkbox" value={this.state.remember} onChange={this.handleRemember} />Remember Me
+                                        <input name="remember" type="checkbox" checked={this.state.remember} onChange={this.handleRemember} />Remember Me
                                     </label>
                                 </div>
                                 <a href="javascript:;" onClick={this.handleLogin} className="btn btn-lg btn-success btn-block">Login</a>

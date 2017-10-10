@@ -22,10 +22,12 @@ class AddCategory extends Component {
             CategoryName: '',
             Description: '',
             ParentId: -1,
-            Status: 1
+            Status: 1,
+            Published: true
         }
 
         this.onSave = this.onSave.bind(this);
+        this.handlePublished = this.handlePublished.bind(this);
     }
 
     componentDidMount() {
@@ -50,6 +52,7 @@ class AddCategory extends Component {
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.category !== undefined) {
+            debugger;
             let data = nextProps.category;
 
             this.setState({
@@ -57,7 +60,8 @@ class AddCategory extends Component {
                 CategoryName: data.CategoryName,
                 Description: data.Description,
                 ParentId: data.ParentId,
-                Status: data.Status
+                Status: data.Status,
+                Published: data.Published
             });
         }
     }
@@ -74,6 +78,12 @@ class AddCategory extends Component {
         this.setState({ ParentId: event.target.value });
     }
 
+    handlePublished(event) {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        this.setState({ Published: value });
+    }
+
     onSave(event) {
         event.preventDefault();
 
@@ -86,7 +96,8 @@ class AddCategory extends Component {
             CategoryName: this.state.CategoryName,
             Description: this.state.Description,
             ParentId: this.state.ParentId,
-            Status: this.state.Status
+            Status: this.state.Status,
+            Published: this.state.Published
         };
 
         if (category.CategoryID !== 0) {
@@ -163,6 +174,12 @@ class AddCategory extends Component {
                         </div>
                     </div>
                     <div className="form-group">
+                        <label className="col-sm-2 col-md-2 control-label">Trạng thái:</label>
+                        <div className="col-sm-6">
+                            <input name="published" type="checkbox" checked={this.state.Published} onChange={this.handlePublished} />
+                        </div>
+                    </div>
+                    <div className="form-group">
                         <div className="col-sm-10 col-sm-offset-2">
                             <button type="button" className="btn btn-primary" onClick={this.onSave}>Lưu</button>
                         </div>
@@ -179,7 +196,6 @@ AddCategory.contextTypes = {
 
 function mapStateToProp(state, ownProps) {
     const categoryId = ownProps.params.id;
-    console.log(state);
 
     return {
         categories: state.categories.length === 0 ? [] : state.categories.categories,

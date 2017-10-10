@@ -22,10 +22,12 @@ class AddCategoryNews extends Component {
             Name: '',
             Description: '',
             ParentId: -1,
-            Status: 1
+            Status: 1,
+            Published: true
         }
 
         this.onSave = this.onSave.bind(this);
+        this.handlePublished = this.handlePublished.bind(this);
     }
 
     componentDidMount() {
@@ -56,6 +58,7 @@ class AddCategoryNews extends Component {
                 Id: data.Id,
                 Name: data.Name,
                 Description: data.Description,
+                Published: data.Published
             });
         }
     }
@@ -72,6 +75,12 @@ class AddCategoryNews extends Component {
         this.setState({ ParentId: event.target.value });
     }
 
+    handlePublished(event) {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        this.setState({ Published: value });
+    }
+
     onSave(event) {
         event.preventDefault();
 
@@ -83,6 +92,7 @@ class AddCategoryNews extends Component {
             Id: this.state.Id,
             Name: this.state.Name,
             Description: this.state.Description,
+            Published: this.state.Published
         };
 
         if (category.Id !== 0) {
@@ -156,6 +166,12 @@ class AddCategoryNews extends Component {
                         <label className="col-sm-2 col-md-2 control-label">Mô tả:</label>
                         <div className="col-sm-6">
                             <textarea className="form-control" name="description" id="description" value={this.state.Description} onChange={this.handleChangeDescription.bind(this)}></textarea>
+                        </div>
+                    </div>
+                    <div className="form-group">
+                        <label className="col-sm-2 col-md-2 control-label">Trạng thái:</label>
+                        <div className="col-sm-6">
+                            <input name="status" type="checkbox" checked={this.state.Published} onChange={this.handlePublished} />
                         </div>
                     </div>
                     <div className="form-group">

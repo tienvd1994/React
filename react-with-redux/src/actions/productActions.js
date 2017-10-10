@@ -27,6 +27,8 @@ export function getByProductIdSuccess(product) {
     return { type: GET_PRODUCT_SUCCESS, product };
 }
 
+axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('access_token');
+
 export function loadProducts(keyword, pageIndex, pageSize) {
     return function (dispatch) {
         return axios.get('http://localhost:49320/api/Products?keyword=' + keyword + '&pageIndex=' + pageIndex + '&pageSize=' + pageSize + '')

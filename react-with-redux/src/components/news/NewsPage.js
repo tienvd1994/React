@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import * as categoriesNewsActions from './../../actions/categoriesNewsActions';
+import * as newsActions from './../../actions/newsActions';
 
 import Pagination from 'react-js-pagination';
 import '../../../node_modules/toastr/build/toastr.min.css';
@@ -15,7 +16,7 @@ import { PAGE_INDEX, PAGE_SIZE } from '../../commons/common';
 class NewsPage extends Component {
     constructor(props) {
         super(props);
-        // this.props.actions.loadCategoriesNews("", PAGE_INDEX, PAGE_SIZE);
+        this.props.newsActions.search("", PAGE_INDEX, PAGE_SIZE);
         this.state = {
             pageIndex: 1
         };
@@ -23,12 +24,12 @@ class NewsPage extends Component {
 
     handleSearch(event) {
         let keyword = event.target.value;
-        this.props.actions.loadCategoriesNews(keyword, PAGE_INDEX, PAGE_SIZE);
+        this.props.newsActions.search(keyword, PAGE_INDEX, PAGE_SIZE);
     }
 
     handlePageChange(pageNumber) {
         this.setState({ pageIndex: pageNumber });
-        this.props.actions.loadCategoriesNews("", pageNumber, PAGE_SIZE);
+        this.props.newsActions.search("", pageNumber, PAGE_SIZE);
     }
 
     onDelete(item) {
@@ -44,14 +45,14 @@ class NewsPage extends Component {
             closeOnConfirm: true
         }, function (isConfirm) {
             if (isConfirm) {
-                // self.props.actions.deleteCategory(item.CategoryID);
-                // toastr.success("Xóa thành công");
+                self.props.newsActions.deleteCategory(item.CategoryID);
+                toastr.success("Xóa thành công");
             }
         });
     }
 
     render() {
-        const { categoriesNews, totalItems, pageIndex } = this.props;
+        const { news, totalItems, pageIndex } = this.props;
 
         return (
             <div id="page-wrapper">
@@ -79,19 +80,18 @@ class NewsPage extends Component {
                         <table className="table table-striped table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th className="text-center">STT</th>
+                                    <th className="text-center">#</th>
                                     <th className="text-center">Tên nhóm</th>
                                     <th className="text-center">Trạng thái</th>
                                     <th className="text-center">Sửa/Xóa</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {/* {categoriesNews.map((item, key) => {
+                                {news.map((item, key) => {
                                     return (
                                         <tr key={item.Id}>
                                             <td className="text-center">{PAGE_SIZE * (this.state.pageIndex - 1) + key + 1}</td>
                                             <td>{item.Name}</td>
-                                            <td>{item.ParentCategoryId}</td>
                                             <td>
                                                 <span className={item.Published === 1 ? "label label-success" : "label label-danger"}>
                                                     {item.Published === 1 ? "Đang dùng" : "Không dùng"}
@@ -108,16 +108,16 @@ class NewsPage extends Component {
                                         </tr>
                                     );
                                 }
-                                )} */}
+                                )}
                             </tbody>
                         </table>
-                        {/* <Pagination
+                        <Pagination
                             activePage={pageIndex}
                             itemsCountPerPage={PAGE_SIZE}
-                            totalItemsCount={this.props.totalItems}
+                            totalItemsCount={totalItems}
                             pageRangeDisplayed={50}
                             onChange={this.handlePageChange.bind(this)}
-                        /> */}
+                        />
                     </div>
                 </div>
             </div>
@@ -125,5 +125,20 @@ class NewsPage extends Component {
     }
 }
 
-export default NewsPage;
+function mapStateToProp(state, ownProps) {
+    return {
+        news: state.news.length === 0 ? [] : state.news.news,
+        totalItems: state.news.length === 0 ? 0 : state.news.totalItems,
+        pageIndex: state.news.length === 0 ? [] : state.news.pageIndex
+    };
+}
+
+function mapDispatchToProp(dispatch) {
+    return {
+        newsActions: bindActionCreators(newsActions, dispatch)
+    };
+}
+
+
+export default connect(mapStateToProp, mapDispatchToProp)(NewsPage);
 

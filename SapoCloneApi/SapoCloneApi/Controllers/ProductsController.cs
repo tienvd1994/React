@@ -11,7 +11,7 @@ using System.Web.Http.Description;
 
 namespace SapoCloneApi.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class ProductsController : ApiController
     {
         private SapoCloneContext db = new SapoCloneContext();

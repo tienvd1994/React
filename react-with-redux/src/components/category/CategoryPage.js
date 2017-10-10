@@ -93,9 +93,10 @@ class CategoryPage extends Component {
                                             <td className="text-center">{PAGE_SIZE * (this.state.pageIndex - 1) + key + 1}</td>
                                             <td>{category.CategoryName}</td>
                                             <td>{category.ParentId}</td>
+                                            {console.log(category.Published)}
                                             <td>
-                                                <span className={category.Status === 1 ? "label label-success" : "label label-danger"}>
-                                                    {category.Status === 1 ? "Đang dùng" : "Không dùng"}
+                                                <span className={category.Published === true ? "label label-success" : "label label-danger"}>
+                                                    {category.Published === true ? "Đang dùng" : "Không dùng"}
                                                 </span>
                                             </td>
                                             <td className="text-center">

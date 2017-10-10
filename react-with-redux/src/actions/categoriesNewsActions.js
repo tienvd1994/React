@@ -20,6 +20,8 @@ export function getByCategoryIdSuccess(categoryNews) {
     }
 }
 
+axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('access_token');
+
 export function loadCategoriesNewsAll() {
     return function (dispatch) {
         return axios.get('http://localhost:49320/api/CategoriesNews')

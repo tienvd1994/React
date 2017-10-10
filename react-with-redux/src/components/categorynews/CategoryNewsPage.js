@@ -94,8 +94,8 @@ class CategoryNewsPage extends Component {
                                             <td>{item.Name}</td>
                                             <td>{item.ParentCategoryId}</td>
                                             <td>
-                                                <span className={item.Published === 1 ? "label label-success" : "label label-danger"}>
-                                                    {item.Published === 1 ? "Đang dùng" : "Không dùng"}
+                                                <span className={item.Published === true ? "label label-success" : "label label-danger"}>
+                                                    {item.Published === true ? "Đang dùng" : "Không dùng"}
                                                 </span>
                                             </td>
                                             <td className="text-center">
@@ -112,11 +112,10 @@ class CategoryNewsPage extends Component {
                                 )}
                             </tbody>
                         </table>
-                        {console.log(this.props.totalItem)}
                         <Pagination
                             activePage={pageIndex}
                             itemsCountPerPage={PAGE_SIZE}
-                            totalItemsCount={this.props.totalItems}
+                            totalItemsCount={totalItems}
                             pageRangeDisplayed={50}
                             onChange={this.handlePageChange.bind(this)}
                         />
@@ -128,7 +127,6 @@ class CategoryNewsPage extends Component {
 }
 
 function mapStateToProp(state, ownProps) {
-    console.log(state);
     return {
         categoriesNews: state.categoriesNews.length === 0 ? [] : state.categoriesNews.categoriesNews,
         totalItems: state.categoriesNews.length === 0 ? 0 : state.categoriesNews.totalItems,
