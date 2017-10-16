@@ -24,6 +24,9 @@ import AddNewsPage from './components/news/AddNewsPage';
 import LoginContainer from './components/LoginContainer';
 import LoginPage from './components/account/LoginPage';
 
+// Configuration.
+import ConfigurationPage from './components/configuration/ConfigurationPage';
+
 // css
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/metismenu/dist/metisMenu.css';
@@ -36,13 +39,18 @@ import '../node_modules/jquery-validation/dist/localization/messages_vi';
 import registerServiceWorker from './registerServiceWorker';
 const store = configureStore();
 
-let firstEntry = true;
-
 function authenticate(nextState, replaceState, callback) {
     if (localStorage.getItem('access_token') === null) {
         window.location.href = '/login';
     } else {
-        firstEntry = false;
+        callback();
+    }
+}
+
+function authenticateLogin(nextState, replaceState, callback) {
+    if (localStorage.getItem('access_token') !== null) {
+        window.location.href = '/';
+    } else {
         callback();
     }
 }
@@ -67,10 +75,13 @@ ReactDOM.render(
 
                 <Route path="news" component={NewsPage} onEnter={authenticate} />
                 <Route path="news-edit" component={AddNewsPage} onEnter={authenticate} />
+                <Route path="news-edit/:id" component={AddNewsPage} onEnter={authenticate} />
+
+                <Route path="configuration" component={ConfigurationPage} onEnter={authenticate} />
             </Route>
 
             <Route component={LoginContainer}>
-                <Route path='/login' component={LoginPage} />
+                <Route path='/login' component={LoginPage} onEnter={authenticateLogin} />
             </Route>
         </Router>
     </Provider>

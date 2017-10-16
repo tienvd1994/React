@@ -20,11 +20,14 @@ export function getByCategoryIdSuccess(categoryNews) {
     }
 }
 
-axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('access_token');
+let authorization = 'Bearer ' + localStorage.getItem('access_token');
 
 export function loadCategoriesNewsAll() {
     return function (dispatch) {
-        return axios.get('http://localhost:49320/api/CategoriesNews')
+        return axios.get('http://192.168.100.200:88/api/CategoriesNews',
+            {
+                headers: { Authorization: authorization }
+            })
             .then(response => {
                 let data = response.data;
                 dispatch(loadCategoriesNewsAllSuccess(data));
@@ -37,7 +40,10 @@ export function loadCategoriesNewsAll() {
 
 export function loadCategoriesNews(keyword, pageIndex, pageSize) {
     return function (dispatch) {
-        return axios.get('http://localhost:49320/api/CategoriesNews?keyword=' + keyword + '&pageIndex=' + pageIndex + '&pageSize=' + pageSize + '')
+        return axios.get('http://192.168.100.200:88/api/CategoriesNews?keyword=' + keyword + '&pageIndex=' + pageIndex + '&pageSize=' + pageSize + '',
+            {
+                headers: { 'Authorization': authorization }
+            })
             .then((response) => {
                 let data = {
                     data: response.data,
@@ -54,7 +60,10 @@ export function loadCategoriesNews(keyword, pageIndex, pageSize) {
 
 export function getById(id) {
     return function (dispatch) {
-        return axios.get('http://localhost:49320/api/CategoriesNews/' + id)
+        return axios.get('http://192.168.100.200:88/api/CategoriesNews/' + id,
+            {
+                headers: { 'Authorization': authorization }
+            })
             .then((response) => {
                 let data = response.data;
                 dispatch(getByCategoryIdSuccess(data));
@@ -67,7 +76,10 @@ export function getById(id) {
 
 export function saveCategory(category) {
     return function (dispatch) {
-        return axios.post('http://localhost:49320/api/CategoriesNews', category)
+        return axios.post('http://192.168.100.200:88/api/CategoriesNews', category,
+            {
+                headers: { 'Authorization': authorization }
+            })
             .then((response) => {
                 if (response.data.status) {
                     dispatch(loadCategoriesNews("", PAGE_INDEX, PAGE_SIZE));
@@ -81,7 +93,10 @@ export function saveCategory(category) {
 
 export function deleteCategoryNews(id) {
     return function (dispatch) {
-        axios.post('http://localhost:49320/api/categoriesnews/delete/' + id)
+        axios.post('http://192.168.100.200:88/api/categoriesnews/delete/' + id, "",
+            {
+                headers: { 'Authorization': authorization }
+            })
             .then((response) => {
                 if (response.data.status) {
                     dispatch(loadCategoriesNews("", PAGE_INDEX, PAGE_SIZE));
@@ -95,7 +110,10 @@ export function deleteCategoryNews(id) {
 
 export function updateCategory(item) {
     return function (dispatch) {
-        return axios.post('http://localhost:49320/api/categoriesnews/update', item)
+        return axios.post('http://192.168.100.200:88/api/categoriesnews/update', item,
+            {
+                headers: { 'Authorization': authorization }
+            })
             .then(function (response) {
                 if (response.data.status) {
                     dispatch(loadCategoriesNews("", PAGE_INDEX, PAGE_SIZE));

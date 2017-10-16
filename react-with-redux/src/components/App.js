@@ -325,6 +325,17 @@ class App extends Component {
                                         </li>
                                     </ul>
                                 </li>
+                                <li>
+                                    <a href="javascript:void(0)"><i className="fa fa-gears fa-fw"></i> Cấu hình<span className="fa arrow"></span></a>
+                                    <ul className="nav nav-second-level">
+                                        <li>
+                                            <Link to="/configuration">Cài đặt chung</Link>
+                                        </li>
+                                        <li>
+                                            {/* <Link to="/categoriesnews">Nhóm tin tức</Link> */}
+                                        </li>
+                                    </ul>
+                                </li>
                             </ul>
                         </div>
                     </div>

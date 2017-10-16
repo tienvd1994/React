@@ -15,11 +15,14 @@ export function getByIdSuccess(newsItem) {
     }
 }
 
-axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('access_token');
+let authorization = 'Bearer ' + localStorage.getItem('access_token');
 
 export function search(keyword, pageIndex, pageSize) {
     return function (dispatch) {
-        return axios.get('http://localhost:49320/api/news?keyword=' + keyword + '&pageIndex=' + pageIndex + '&pageSize=' + pageSize + '')
+        return axios.get('http://192.168.100.200:88/api/news?keyword=' + keyword + '&pageIndex=' + pageIndex + '&pageSize=' + pageSize + '',
+            {
+                headers: { 'Authorization': authorization }
+            })
             .then((response) => {
                 let data = {
                     data: response.data,
@@ -36,7 +39,10 @@ export function search(keyword, pageIndex, pageSize) {
 
 export function getById(id) {
     return function (dispatch) {
-        return axios.get('http://localhost:49320/api/news/' + id)
+        return axios.get('http://192.168.100.200:88/api/news/' + id,
+            {
+                headers: { 'Authorization': authorization }
+            })
             .then((response) => {
                 let data = response.data;
                 dispatch(getByIdSuccess(data));
@@ -49,7 +55,10 @@ export function getById(id) {
 
 export function saveNews(item) {
     return function (dispatch) {
-        return axios.post('http://localhost:49320/api/news', item)
+        return axios.post('http://192.168.100.200:88/api/news', item,
+            {
+                headers: { 'Authorization': authorization }
+            })
             .then((response) => {
                 if (response.data.status) {
                     dispatch(search("", PAGE_INDEX, PAGE_SIZE));
@@ -63,7 +72,10 @@ export function saveNews(item) {
 
 export function deleteNews(id) {
     return function (dispatch) {
-        axios.post('http://localhost:49320/api/news/delete/' + id)
+        axios.post('http://192.168.100.200:88/api/news/delete/' + id, "",
+            {
+                headers: { 'Authorization': authorization }
+            })
             .then((response) => {
                 if (response.data.status) {
                     dispatch(search("", PAGE_INDEX, PAGE_SIZE));
@@ -77,7 +89,10 @@ export function deleteNews(id) {
 
 export function updateNews(item) {
     return function (dispatch) {
-        return axios.post('http://localhost:49320/api/news/update', item)
+        return axios.post('http://192.168.100.200:88/api/news/update', item,
+            {
+                headers: { 'Authorization': authorization }
+            })
             .then(function (response) {
                 if (response.data.status) {
                     dispatch(search("", PAGE_INDEX, PAGE_SIZE));

@@ -50,5 +50,10 @@ namespace SapoCloneApi.Models
         public int? UpdatedUserId { get; set; }
 
         public string UnsignName { get; set; }
+
+        public int? CategoryId { get; set; }
+
+        [StringLength(1000)]
+        public string ImageUrl { get; set; }
     }
 }

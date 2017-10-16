@@ -54,8 +54,8 @@ class LoginPage extends Component {
         if (!$('#login').valid()) {
             return;
         }
-
-        axios.post('http://localhost:49320/Token', `grant_type=password&username=${this.state.username}&password=${this.state.password}`)
+        
+        axios.post('http://192.168.100.200:88/Token', `grant_type=password&username=${this.state.username}&password=${this.state.password}`)
             .then((response) => {
                 if (response.statusText === "OK") {
                     // sessionStorage.setItem('access_token', response.data.access_token);

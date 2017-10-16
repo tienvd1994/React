@@ -35,7 +35,7 @@ namespace SapoCloneApi.Controllers
                     Status = m.Status,
                     Published = m.Published
                 }),
-                totalItems = db.Categories.Count(m => (string.IsNullOrEmpty(keyword) || m.CategoryName.Contains(keyword)))
+                totalItems = await db.Categories.CountAsync(m => (string.IsNullOrEmpty(keyword) || m.CategoryName.Contains(keyword)))
             });
         }
 

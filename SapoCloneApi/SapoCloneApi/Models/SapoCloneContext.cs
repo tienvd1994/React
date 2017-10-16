@@ -49,6 +49,10 @@ namespace SapoCloneApi.Models
                 .Property(e => e.UnsignName)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<News>()
+                .Property(e => e.ImageUrl)
+                .IsUnicode(false);
+
             modelBuilder.Entity<OrderDetail>()
                 .Property(e => e.UnitPrice)
                 .HasPrecision(19, 4);

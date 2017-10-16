@@ -13,6 +13,7 @@ export default function newsReducer(state = { news: [], totalItems: 0, pageIndex
             };
 
         case GET_NEWS_SUCCESS:
+            debugger;
             return { ...state, newsItem: action.newsItem };
 
         default:

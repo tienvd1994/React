@@ -27,11 +27,14 @@ export function getByProductIdSuccess(product) {
     return { type: GET_PRODUCT_SUCCESS, product };
 }
 
-axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('access_token');
+let authorization = 'Bearer ' + localStorage.getItem('access_token');
 
 export function loadProducts(keyword, pageIndex, pageSize) {
     return function (dispatch) {
-        return axios.get('http://localhost:49320/api/Products?keyword=' + keyword + '&pageIndex=' + pageIndex + '&pageSize=' + pageSize + '')
+        return axios.get('http://192.168.100.200:88/api/Products?keyword=' + keyword + '&pageIndex=' + pageIndex + '&pageSize=' + pageSize + '',
+            {
+                headers: { 'Authorization': authorization }
+            })
             .then((response) => {
                 let data = {
                     data: response.data,
@@ -48,7 +51,10 @@ export function loadProducts(keyword, pageIndex, pageSize) {
 
 export function saveProduct(product) {
     return function (dispatch) {
-        return axios.post('http://localhost:49320/api/Products', product)
+        return axios.post('http://192.168.100.200:88/api/Products', product,
+            {
+                headers: { 'Authorization': authorization }
+            })
             .then((response) => {
                 if (response.data.status) {
                     // dispatch(createProductSuccess(response.status));
@@ -63,7 +69,10 @@ export function saveProduct(product) {
 
 export function deleteProduct(id) {
     return function (dispatch) {
-        axios.post('http://localhost:49320/api/product/delete/' + id)
+        axios.post('http://192.168.100.200:88/api/product/delete/' + id,
+            {
+                headers: { 'Authorization': authorization }
+            })
             .then((response) => {
                 if (response.data.status) {
                     // dispatch(deleteProductSuccess(response));
@@ -78,7 +87,10 @@ export function deleteProduct(id) {
 
 export function updateProduct(product) {
     return function (dispatch) {
-        return axios.post('http://localhost:49320/api/product/update', product)
+        return axios.post('http://192.168.100.200:88/api/product/update', product,
+            {
+                headers: { 'Authorization': authorization }
+            })
             .then(function (response) {
                 if (response.data.status) {
                     dispatch(loadProducts("", 1, 20));
@@ -92,7 +104,10 @@ export function updateProduct(product) {
 
 export function getByProductId(id) {
     return function (dispatch) {
-        return axios.get('http://localhost:49320/api/Products/' + id)
+        return axios.get('http://192.168.100.200:88/api/Products/' + id, "",
+            {
+                headers: { 'Authorization': authorization }
+            })
             .then((response) => {
                 let data = response.data;
                 dispatch(getByProductIdSuccess(data));

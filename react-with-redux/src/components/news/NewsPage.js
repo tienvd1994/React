@@ -3,7 +3,6 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import * as categoriesNewsActions from './../../actions/categoriesNewsActions';
 import * as newsActions from './../../actions/newsActions';
 
 import Pagination from 'react-js-pagination';
@@ -16,10 +15,13 @@ import { PAGE_INDEX, PAGE_SIZE } from '../../commons/common';
 class NewsPage extends Component {
     constructor(props) {
         super(props);
-        this.props.newsActions.search("", PAGE_INDEX, PAGE_SIZE);
         this.state = {
             pageIndex: 1
         };
+    }
+
+    componentDidMount() {
+        this.props.newsActions.search("", PAGE_INDEX, PAGE_SIZE);
     }
 
     handleSearch(event) {
@@ -37,7 +39,7 @@ class NewsPage extends Component {
 
         swal({
             title: "Xác nhận sửa",
-            text: "Bạn có chắc chắn muốn lưu thông tin không?",
+            text: "Bạn có chắc chắn muốn xóa không?",
             type: "warning",
             showCancelButton: true,
             confirmButtonText: "Đồng ý",
@@ -45,7 +47,7 @@ class NewsPage extends Component {
             closeOnConfirm: true
         }, function (isConfirm) {
             if (isConfirm) {
-                self.props.newsActions.deleteCategory(item.CategoryID);
+                self.props.newsActions.deleteNews(item.Id);
                 toastr.success("Xóa thành công");
             }
         });
@@ -81,7 +83,7 @@ class NewsPage extends Component {
                             <thead>
                                 <tr>
                                     <th className="text-center">#</th>
-                                    <th className="text-center">Tên nhóm</th>
+                                    <th className="text-center">Tên</th>
                                     <th className="text-center">Trạng thái</th>
                                     <th className="text-center">Sửa/Xóa</th>
                                 </tr>
@@ -91,17 +93,17 @@ class NewsPage extends Component {
                                     return (
                                         <tr key={item.Id}>
                                             <td className="text-center">{PAGE_SIZE * (this.state.pageIndex - 1) + key + 1}</td>
-                                            <td>{item.Name}</td>
+                                            <td>{item.Title}</td>
                                             <td>
-                                                <span className={item.Published === 1 ? "label label-success" : "label label-danger"}>
-                                                    {item.Published === 1 ? "Đang dùng" : "Không dùng"}
+                                                <span className={item.Published === true ? "label label-success" : "label label-danger"}>
+                                                    {item.Published === true ? "Đang dùng" : "Không dùng"}
                                                 </span>
                                             </td>
                                             <td className="text-center">
-                                                <Link to={`/categorynews/${item.Id}`} className="btn green btn-outline btn-sm">
+                                                <Link to={`/news-edit/${item.Id}`} className="btn green btn-outline btn-sm">
                                                     <i className="glyphicon glyphicon-edit"></i>
                                                 </Link>
-                                                <a href="javascript:void(0)" className="btn green btn-outline btn-sm" onClick={this.onDelete.bind(this, item)}>
+                                                <a href="javascript:;" className="btn green btn-outline btn-sm" onClick={this.onDelete.bind(this, item)}>
                                                     <i className="glyphicon glyphicon-trash"></i>
                                                 </a>
                                             </td>
@@ -123,6 +125,10 @@ class NewsPage extends Component {
             </div>
         );
     }
+}
+
+NewsPage.propTypes = {
+    newsActions: PropTypes.object.isRequired
 }
 
 function mapStateToProp(state, ownProps) {

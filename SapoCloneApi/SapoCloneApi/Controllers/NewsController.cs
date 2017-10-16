@@ -1,4 +1,5 @@
 ﻿using SapoCloneApi.Models;
+using System;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -49,45 +50,72 @@ namespace SapoCloneApi.Controllers
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> PutNews(News news)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var item = await db.News.FindAsync(news.Id);
-
-            if (item == null)
-            {
-                return NotFound();
-            }
-
-            db.Entry(news).State = EntityState.Modified;
-
             try
             {
-                await db.SaveChangesAsync();
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                var item = await db.News.FindAsync(news.Id);
+
+                if (item == null)
+                {
+                    return NotFound();
+                }
+
+                item.Title = news.Title;
+                item.Short = news.Short;
+                item.Full = news.Full;
+                item.Published = news.Published;
+                item.ImageUrl = news.ImageUrl;
+                item.CategoryId = news.CategoryId;
+                item.UpdatedOnUtc = DateTime.Now;
+                item.UnsignName = Common.Utils.Ucs2Convert(news.Title);
+                db.Entry(item).State = EntityState.Modified;
+
+                try
+                {
+                    await db.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    throw;
+                }
+
+                return StatusCode(HttpStatusCode.NoContent);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception ex)
             {
+
                 throw;
             }
-
-            return StatusCode(HttpStatusCode.NoContent);
         }
 
         // POST: api/News
         [ResponseType(typeof(News))]
         public async Task<IHttpActionResult> PostNews(News news)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return BadRequest(ModelState);
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                news.UnsignName = Common.Utils.Ucs2Convert(news.Title);
+                news.CreatedOnUtc = DateTime.Now;
+                news.UpdatedOnUtc = DateTime.Now;
+                db.News.Add(news);
+                await db.SaveChangesAsync();
+
+                return CreatedAtRoute("DefaultApi", new { id = news.Id }, news);
             }
+            catch (Exception ex)
+            {
 
-            db.News.Add(news);
-            await db.SaveChangesAsync();
-
-            return CreatedAtRoute("DefaultApi", new { id = news.Id }, news);
+                throw;
+            }
         }
 
         // DELETE: api/News/5
@@ -96,16 +124,29 @@ namespace SapoCloneApi.Controllers
         [ResponseType(typeof(News))]
         public async Task<IHttpActionResult> DeleteNews(int id)
         {
-            News news = await db.News.FindAsync(id);
-            if (news == null)
+            try
             {
-                return NotFound();
+
+                News news = await db.News.FindAsync(id);
+                if (news == null)
+                {
+                    return NotFound();
+                }
+
+                db.News.Remove(news);
+                await db.SaveChangesAsync();
+
+                return Ok(new
+                {
+                    status = true,
+                    data = news
+                });
             }
+            catch (Exception ex)
+            {
 
-            db.News.Remove(news);
-            await db.SaveChangesAsync();
-
-            return Ok(news);
+                throw;
+            }
         }
 
         protected override void Dispose(bool disposing)

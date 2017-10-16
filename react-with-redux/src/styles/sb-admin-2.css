@@ -407,6 +407,10 @@ table.dataTable thead .sorting:after {
   color: #ff0000 !important;
 }
 
+/* .form-horizontal .control-label {
+  text-align: left;
+} */
+
 @media (max-width: 767px) {
   ul.timeline:before {
     left: 40px;

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -8,6 +7,7 @@ import { bindActionCreators } from 'redux';
 import '../../../node_modules/toastr/build/toastr.min.css';
 
 // js.
+import axios from 'axios';
 import $ from 'jquery';
 import toastr from 'toastr';
 import 'jquery-validation';
@@ -158,10 +158,13 @@ class AddProduct extends Component {
         data.append('file', event.target.files[0]);
         // data.append('name', 'some value user types');
         // data.append('description', 'some value user types');
-        axios.post('http://localhost:49320/api/upload/image', data).then((response) => {
-            console.log(response);
-            this.setState({ image: response.data });
-        });
+        axios.post('http://192.168.100.200:88/api/upload/image',
+            {
+                headers: { 'Authorization': 'Bearer ' + localStorage.getItem('access_token') }
+            }, data).then((response) => {
+                console.log(response);
+                this.setState({ image: response.data });
+            });
     }
 
     render() {
@@ -232,7 +235,7 @@ class AddProduct extends Component {
                         <label className="col-sm-2 col-md-2 control-label">Image:</label>
                         <div className="col-sm-4">
                             {(this.state.image === '' || this.state.image === null ? '' :
-                                <img src={"http://localhost:49320/" + this.state.image} alt="img-product" class="img-circle" width="100" height="100" />)}
+                                <img src={"http://192.168.100.200:88/" + this.state.image} alt="img-product" class="img-circle" width="100" height="100" />)}
                             <input type="file" onChange={this.handleUploadFile} />
                         </div>
                     </div>

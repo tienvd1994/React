@@ -7,11 +7,17 @@ import { bindActionCreators } from 'redux';
 import '../../../node_modules/toastr/build/toastr.min.css';
 
 // js.
+import axios from 'axios';
 import $ from 'jquery';
 import toastr from 'toastr';
 import 'jquery-validation';
+import 'codemirror';
+import summernote from 'summernote';
+
+import '../../../node_modules/summernote/dist/summernote.css';
 
 import * as categoriesNewsActions from './../../actions/categoriesNewsActions';
+import * as newsActions from './../../actions/newsActions';
 
 class AddNewsPage extends Component {
     constructor(props) {
@@ -20,42 +26,61 @@ class AddNewsPage extends Component {
         this.state = {
             Id: 0,
             Name: '',
-            Description: '',
-            Status: 1
+            ShortDescription: '',
+            FullDescription: '',
+            Published: true,
+            CategoryId: 0,
+            ImageUrl: ''
         }
 
+        this.handlePublished = this.handlePublished.bind(this);
+        this.handleUploadFile = this.handleUploadFile.bind(this);
+        this.handleChangeShortDescription = this.handleChangeShortDescription.bind(this);
+        this.handleChangeCategoryId = this.handleChangeCategoryId.bind(this);
+        this.handleChangeName = this.handleChangeName.bind(this);
+        this.handleChangeFullDescription = this.handleChangeFullDescription.bind(this);
         this.onSave = this.onSave.bind(this);
     }
 
     componentDidMount() {
         $(function () {
-            $("form[name='editCategory']").validate({
+            $("form[name='editForm']").validate({
                 rules: {
                     name: "required",
-                    description: "required",
+                    categoryId: "required",
                 },
                 submitHandler: function (form) {
                     form.submit();
                 }
             });
+
+            $('#fulldescription').summernote({
+                height: 150
+            });
         });
 
-        this.props.actions.loadCategoriesNewsAll();
+        this.props.categoriesNewsActions.loadCategoriesNewsAll();
 
-        if (this.props.categoryNewsId !== undefined) {
-            this.props.actions.getById(this.props.categoryNewsId);
+        if (this.props.newsId !== undefined) {
+            this.props.newsActions.getById(this.props.newsId);
         }
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.categoryNews !== undefined) {
-            let data = nextProps.categoryNews;
+        if (nextProps.news !== undefined) {
+            let data = nextProps.news;
 
             this.setState({
                 Id: data.Id,
-                Name: data.Name,
-                Description: data.Description,
+                Name: data.Title,
+                ShortDescription: data.Short,
+                FullDescription: data.Full,
+                Published: data.Published,
+                CategoryId: data.CategoryId,
+                ImageUrl: data.ImageUrl
             });
+
+            $('#fulldescription').summernote('code', data.Full);
         }
     }
 
@@ -63,29 +88,55 @@ class AddNewsPage extends Component {
         this.setState({ Name: event.target.value });
     }
 
-    handleChangeDescription(event) {
-        this.setState({ Description: event.target.value });
+    handleChangeShortDescription(event) {
+        this.setState({ ShortDescription: event.target.value });
     }
 
-    handleChangeParentId(event) {
-        this.setState({ ParentId: event.target.value });
+    handleChangeFullDescription(event) {
+        this.setState({ FullDescription: event.target.value });
+    }
+
+    handleChangeCategoryId(event) {
+        this.setState({ CategoryId: event.target.value });
+    }
+
+    handlePublished(event) {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        this.setState({ Published: value });
+    }
+
+    handleUploadFile = (event) => {
+        const data = new FormData();
+        data.append('file', event.target.files[0]);
+
+        axios.post('http://192.168.100.200:88/api/upload/image', data,
+            {
+                headers: { 'Authorization': 'Bearer ' + localStorage.getItem('access_token') }
+            }).then((response) => {
+                this.setState({ ImageUrl: response.data });
+            });
     }
 
     onSave(event) {
         event.preventDefault();
 
-        if (!$('#editCategory').valid()) {
+        if (!$('#editForm').valid()) {
             return;
         }
 
-        const category = {
+        const news = {
             Id: this.state.Id,
-            Name: this.state.Name,
-            Description: this.state.Description,
+            Title: this.state.Name,
+            Short: this.state.ShortDescription,
+            Full: $('#fulldescription').summernote('code'),
+            Published: this.state.Published,
+            CategoryId: this.state.CategoryId,
+            ImageUrl: this.state.ImageUrl
         };
 
-        if (category.Id !== 0) {
-            this.props.actions.updateCategory(category)
+        if (news.Id !== 0) {
+            this.props.newsActions.updateNews(news)
                 .then(() => {
                     toastr.success("Cập nhật thành công");
                     this.redirect();
@@ -95,7 +146,7 @@ class AddNewsPage extends Component {
                 });
         }
         else {
-            this.props.actions.saveCategory(category)
+            this.props.newsActions.saveNews(news)
                 .then(() => {
                     toastr.success("Thêm mới thành công");
                     this.redirect();
@@ -122,39 +173,60 @@ class AddNewsPage extends Component {
                 <div className="row">
                     <div className="col-sm-6">
                         <h1 className="page-header">
-                            Thêm mới nhóm tin tức
+                            Thêm mới tin tức
                             <small><i className="fa fa-arrow-circle-left"></i>
                                 <a href="javascript:void(0)" onClick={this.goBack.bind(this)}>Quay lại danh sách</a>
                             </small>
                         </h1>
                     </div>
                 </div>
-                <form className="form-horizontal" name="editCategory" id="editCategory">
+                <form className="form-horizontal" name="editForm" id="editForm">
                     <div className="form-group">
                         <label className="col-sm-2 col-md-2 control-label">Nhóm cha:</label>
                         <div className="col-sm-6">
-                            <select className="form-control" name="parentId" id="parentId" value={this.state.ParentId} onChange={this.handleChangeParentId.bind(this)}>
+                            <select className="form-control" name="categoryId" id="categoryId" value={this.state.CategoryId} onChange={this.handleChangeCategoryId}>
                                 <option value="">
-                                    Choosen category
+                                    Chọn nhóm tin
                                 </option>
                                 {categoriesNews.map(function (item, key) {
                                     return (
-                                        <option key={key} value={item.CategoryID}>{item.CategoryName}</option>
+                                        <option key={key} value={item.Id}>{item.Name}</option>
                                     )
                                 })}
                             </select>
                         </div>
                     </div>
                     <div className="form-group">
-                        <label className="col-sm-2 col-md-2 control-label">Tên nhóm:</label>
+                        <label className="col-sm-2 col-md-2 control-label">Tên:</label>
                         <div className="col-sm-6">
-                            <input className="form-control" name="name" id="name" value={this.state.Name} type="text" onChange={this.handleChangeName.bind(this)} />
+                            <input className="form-control" name="name" id="name" value={this.state.Name} type="text" onChange={this.handleChangeName} />
                         </div>
                     </div>
                     <div className="form-group">
-                        <label className="col-sm-2 col-md-2 control-label">Mô tả:</label>
+                        <label className="col-sm-2 col-md-2 control-label">Ảnh:</label>
+                        <div className="col-sm-4">
+                            {console.log(this.state.ImageUrl)}
+                            {(this.state.ImageUrl === '' || this.state.ImageUrl === null ? '' :
+                                <img src={"http://192.168.100.200:88/" + this.state.ImageUrl} alt="img-product" height="80" />)}
+                            <input type="file" onChange={this.handleUploadFile} />
+                        </div>
+                    </div>
+                    <div className="form-group">
+                        <label className="col-sm-2 col-md-2 control-label">Nội dung tóm tắt:</label>
                         <div className="col-sm-6">
-                            <textarea className="form-control" name="description" id="description" value={this.state.Description} onChange={this.handleChangeDescription.bind(this)}></textarea>
+                            <textarea className="form-control" name="shortdescription" id="shortdescription" value={this.state.ShortDescription} onChange={this.handleChangeShortDescription}></textarea>
+                        </div>
+                    </div>
+                    <div className="form-group">
+                        <label className="col-sm-2 col-md-2 control-label">Nội dung đầy đủ:</label>
+                        <div className="col-sm-6">
+                            <textarea className="form-control" name="fulldescription" id="fulldescription" value={this.state.FullDescription} onChange={this.handleChangeFullDescription}></textarea>
+                        </div>
+                    </div>
+                    <div className="form-group">
+                        <label className="col-sm-2 col-md-2 control-label">Trạng thái:</label>
+                        <div className="col-sm-6">
+                            <input name="status" type="checkbox" checked={this.state.Published} onChange={this.handlePublished} />
                         </div>
                     </div>
                     <div className="form-group">
@@ -172,4 +244,22 @@ AddNewsPage.contextTypes = {
     router: PropTypes.object
 };
 
-export default AddNewsPage;
+function mapStateToProp(state, ownProps) {
+    console.log(state);
+    const id = ownProps.params.id;
+
+    return {
+        categoriesNews: state.categoriesNews.length === 0 ? [] : state.categoriesNews.categoriesNews,
+        newsId: id,
+        news: state.news.newsItem
+    };
+}
+
+function mapDispatchToProp(dispatch) {
+    return {
+        newsActions: bindActionCreators(newsActions, dispatch),
+        categoriesNewsActions: bindActionCreators(categoriesNewsActions, dispatch),
+    };
+}
+
+export default connect(mapStateToProp, mapDispatchToProp)(AddNewsPage);

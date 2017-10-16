@@ -190,7 +190,6 @@ AddCategoryNews.contextTypes = {
 };
 
 function mapStateToProp(state, ownProps) {
-    debugger;
     const id = ownProps.params.id;
 
     return {
