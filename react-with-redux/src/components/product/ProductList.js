@@ -18,9 +18,9 @@ const ProductList = ({ products }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {products.map((product, key) =>
-                        {/* <ProductListRow key={product.ProductID} index={key} product={product} /> */ }
-                        )}
+                        {/* {products.map((product, key) =>
+                            {/* <ProductListRow key={product.ProductID} index={key} product={product} /> */ }
+                        )} */}
                     </tbody>
                 </table>
                 {/* <Pagination
@@ -38,6 +38,5 @@ const ProductList = ({ products }) => {
 ProductList.propTypes = {
     products: PropTypes.array.isRequired
 };
-
 
 export default ProductList;

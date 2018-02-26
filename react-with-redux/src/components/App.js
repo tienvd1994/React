@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link, IndexLink } from 'react-router';
+import window from 'global';
 
 import $ from 'jquery';
 global.jQuery = $;
 global.jquery = $;
 global.$ = $;
-require('bootstrap');
-require('metismenu');
+global.window = window;
+
+// require('metismenu');
 
 class App extends Component {
     constructor(props) {
@@ -17,9 +19,9 @@ class App extends Component {
 
     componentDidMount() {
         // $('#side-menu').metisMenu();
-        $(function () {
-            $('#side-menu').metisMenu();
-        });
+        // $(function () {
+        //     $('#side-menu').metisMenu();
+        // });
         $(function () {
             $(window).bind("load resize", function () {
                 var topOffset = 50;

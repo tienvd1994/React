@@ -13,6 +13,7 @@ import swal from 'sweetalert';
 
 class ProductPage extends Component {
     constructor(props) {
+        debugger;
         super(props);
         if (props.products === undefined) {
             this.props.actions.loadProducts("", PAGE_INDEX, PAGE_SIZE);

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
@@ -78,7 +77,7 @@ class ConfigurationPage extends Component {
 
         axios.post('http://192.168.100.200:88/api/upload/image', data,
             {
-                headers: { 'Authorization': 'Bearer ' + localStorage.getItem('access_token') }
+                // headers: { 'Authorization': 'Bearer ' + localStorage.getItem('access_token') }
             }).then((response) => {
                 this.setState({ logo: response.data });
             });
@@ -192,6 +191,10 @@ class ConfigurationPage extends Component {
             </div>
         );
     }
+}
+
+ConfigurationPage.propTypes = {
+    actions: PropTypes.object.isRequired
 }
 
 function mapStateToProp(state, ownProps) {

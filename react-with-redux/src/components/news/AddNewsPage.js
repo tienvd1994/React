@@ -112,7 +112,7 @@ class AddNewsPage extends Component {
 
         axios.post('http://192.168.100.200:88/api/upload/image', data,
             {
-                headers: { 'Authorization': 'Bearer ' + localStorage.getItem('access_token') }
+                // headers: { 'Authorization': 'Bearer ' + localStorage.getItem('access_token') }
             }).then((response) => {
                 this.setState({ ImageUrl: response.data });
             });
